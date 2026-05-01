@@ -1,0 +1,28 @@
+---
+import "../styles/global.css";
+import config from "../lib/wedding-config";
+
+interface Props {
+  title?: string;
+}
+
+const { title = `${config.couple.partner1} & ${config.couple.partner2} — ${config.date.display}` } = Astro.props;
+const description = `Join ${config.couple.partner1} and ${config.couple.partner2} as they celebrate their wedding on ${config.date.display} at ${config.venue.name}, ${config.venue.city}.`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="paper-grain">
+    <slot />
+  </body>
+</html>

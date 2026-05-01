@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/sections/Hero.astro";
+import OurStory from "../components/sections/OurStory.astro";
+import WeddingDetails from "../components/sections/WeddingDetails.astro";
+import EventFlowSection from "../components/sections/EventFlowSection.astro";
+import GallerySection from "../components/sections/GallerySection.astro";
+import RsvpSection from "../components/sections/RsvpSection.astro";
+import GiftsSection from "../components/sections/GiftsSection.astro";
+import FaqSection from "../components/sections/FaqSection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import Footer from "../components/sections/Footer.astro";
+
+import StickyNav from "../components/islands/StickyNav";
+import CustomCursor from "../components/islands/CustomCursor";
+import SaveTheDateFab from "../components/islands/SaveTheDateFab";
+import BackToTop from "../components/islands/BackToTop";
+---
+
+<Layout>
+  <StickyNav client:load />
+  <CustomCursor client:load />
+  <SaveTheDateFab client:visible />
+  <BackToTop client:visible />
+
+  <main>
+    <Hero />
+    <OurStory />
+    <WeddingDetails />
+    <EventFlowSection />
+    <GallerySection />
+    <RsvpSection />
+    <GiftsSection />
+    <FaqSection />
+    <ContactSection />
+  </main>
+
+  <Footer />
+</Layout>

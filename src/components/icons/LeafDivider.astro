@@ -1,0 +1,25 @@
+---
+interface Props {
+  class?: string;
+  color?: string;
+}
+const { class: className = "", color = "var(--wood)" } = Astro.props;
+---
+
+<svg
+  class={`w-full ${className}`}
+  viewBox="0 0 400 30"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  preserveAspectRatio="xMidYMid meet"
+  aria-hidden="true"
+>
+  <line x1="40" y1="15" x2="160" y2="15" stroke={color} stroke-width="0.5" opacity="0.3" />
+  <line x1="240" y1="15" x2="360" y2="15" stroke={color} stroke-width="0.5" opacity="0.3" />
+  <path d="M180 15 C185 8, 195 5, 200 3 C205 5, 215 8, 220 15 C215 12, 205 10, 200 8 C195 10, 185 12, 180 15Z" stroke={color} stroke-width="1.25" />
+  <path d="M190 15 C193 10, 198 7, 200 6 C202 7, 207 10, 210 15 C207 12, 203 10, 200 9 C197 10, 193 12, 190 15Z" stroke={color} stroke-width="1" />
+  <path d="M172 17 C176 14, 182 12, 186 13" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M214 13 C218 12, 224 14, 228 17" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M164 19 C168 16, 174 14, 178 14" stroke={color} stroke-width="1" stroke-linecap="round" opacity="0.6" />
+  <path d="M222 14 C226 14, 232 16, 236 19" stroke={color} stroke-width="1" stroke-linecap="round" opacity="0.6" />
+</svg>

@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Reduced Motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Font Imports ───────────────────────────────────────────── */
+@import "@fontsource/cormorant-garamond/300.css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/300-italic.css";
+@import "@fontsource/cormorant-garamond/400-italic.css";
+@import "@fontsource/great-vibes/400.css";
+@import "@fontsource/lora/400.css";
+@import "@fontsource/lora/500.css";
+@import "@fontsource/lora/400-italic.css";
+@import "@fontsource/jetbrains-mono/400.css";
+
+/* ─── CSS Custom Properties ──────────────────────────────────── */
+:root {
+  --paper: #FAF7F0;
+  --paper-deep: #F1ECDF;
+  --paper-fold: #E8DDD0;
+  --olive: #4A5D3A;
+  --olive-soft: #7A8B6A;
+  --wood: #6B4F3A;
+  --wood-deep: #3E2C1F;
+  --ink: #2A2218;
+  --gold: #B8935A;
+
+  --shadow-sm: 0 2px 8px rgba(62,44,31,0.07);
+  --shadow-md: 0 6px 24px rgba(62,44,31,0.10);
+  --shadow-lg: 0 16px 48px rgba(62,44,31,0.13);
+
+  --border-card: 1px solid rgba(107,79,58,0.22);
+  --border-inset: inset 0 0 0 4px rgba(107,79,58,0.10);
+}
+
+/* ─── Base ───────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lora', serif;
+  color: var(--wood-deep);
+  background-color: var(--paper);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Paper Grain Texture ────────────────────────────────────── */
+.paper-grain::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+}
+
+/* ─── Typography Utilities ───────────────────────────────────── */
+.font-display {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-script {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-mono-micro {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--olive-soft);
+}
+
+/* ─── Card Styles ────────────────────────────────────────────── */
+.card-bordered {
+  border: var(--border-card);
+  box-shadow: var(--border-inset);
+  background: var(--paper-deep);
+}
+
+/* ─── Focus Rings ────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--olive);
+  outline-offset: 2px;
+}
+
+/* ─── Scroll Cue Animation ───────────────────────────────────── */
+@keyframes scrollCue {
+  0% { transform: scaleY(0); }
+  50% { transform: scaleY(1); }
+  100% { transform: scaleY(0); }
+}
+
+.scroll-cue-line {
+  width: 1px;
+  height: 48px;
+  background: rgba(107,79,58,0.4);
+  transform-origin: top;
+  animation: scrollCue 1.5s ease infinite;
+}
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection {
+  background: rgba(74,93,58,0.2);
+  color: var(--ink);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(107,79,58,0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107,79,58,0.4);
+}
+
+/* ─── Utility: Lined Card (for message textarea) ─────────────── */
+.lined-card {
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    rgba(107,79,58,0.12) 31px,
+    rgba(107,79,58,0.12) 32px
+  );
+  background-position: 0 8px;
+  line-height: 32px;
+}

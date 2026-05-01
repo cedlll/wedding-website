@@ -1,0 +1,27 @@
+---
+interface Props {
+  class?: string;
+  color?: string;
+}
+const { class: className = "", color = "var(--wood)" } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 40 60"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <path d="M20 5 C16 12, 10 16, 8 20" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M20 5 C24 12, 30 16, 32 20" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M20 12 C14 18, 7 22, 5 27" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M20 12 C26 18, 33 22, 35 27" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M20 20 C13 26, 6 30, 6 35" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M20 20 C27 26, 34 30, 34 35" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M20 28 C15 33, 10 37, 10 41" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M20 28 C25 33, 30 37, 30 41" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M20 36 C17 40, 14 43, 15 46" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M20 36 C23 40, 26 43, 25 46" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+  <path d="M20 46 L20 55" stroke={color} stroke-width="1.25" stroke-linecap="round" />
+</svg>

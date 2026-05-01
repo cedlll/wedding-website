@@ -1,0 +1,20 @@
+---
+import LeafDivider from "../icons/LeafDivider.astro";
+import config from "../../lib/wedding-config";
+---
+
+<footer class="py-16 px-6 text-center" style="background-color: var(--paper);">
+  <LeafDivider class="max-w-md mx-auto mb-12" />
+
+  <p class="font-script text-4xl mb-4" style="color: var(--gold);">
+    {config.couple.partner1} &amp; {config.couple.partner2}
+  </p>
+
+  <p class="font-mono-micro mb-8" style="color: var(--olive-soft);">
+    {config.date.display} · {config.venue.name}, {config.venue.city}
+  </p>
+
+  <p class="font-mono-micro" style="color: var(--olive-soft); opacity: 0.6; font-size: 10px;">
+    Made with love in Manila
+  </p>
+</footer>

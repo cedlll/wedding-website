@@ -1,0 +1,19 @@
+---
+import Gallery from "../islands/Gallery";
+import LeafDivider from "../icons/LeafDivider.astro";
+---
+
+<section id="gallery" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section label -->
+    <div class="text-center mb-16">
+      <span class="section-label">04 · Gallery</span>
+      <h2 class="font-display text-4xl md:text-5xl font-light mt-4" style="color: var(--wood-deep);">
+        Our Moments
+      </h2>
+      <LeafDivider class="max-w-xs mx-auto mt-6" />
+    </div>
+
+    <Gallery client:visible />
+  </div>
+</section>

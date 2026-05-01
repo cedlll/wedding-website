@@ -1,0 +1,41 @@
+---
+import TimelineCard from "../islands/TimelineCard";
+import LeafDivider from "../icons/LeafDivider.astro";
+import config from "../../lib/wedding-config";
+---
+
+<section id="our-story" class="py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+    <!-- Section label -->
+    <div class="text-center mb-16">
+      <span class="section-label">01 · Our Story</span>
+      <h2 class="font-display text-4xl md:text-5xl font-light mt-4" style="color: var(--wood-deep);">
+        How It All Began
+      </h2>
+      <LeafDivider class="max-w-xs mx-auto mt-6" />
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- Center line (desktop) / left line (mobile) -->
+      <div
+        class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-px"
+        style="background-color: rgba(107,79,58,0.15);"
+        aria-hidden="true"
+      ></div>
+
+      <div class="pl-12 md:pl-0">
+        {config.story.map((milestone, i) => (
+          <TimelineCard
+            client:visible
+            date={milestone.date}
+            title={milestone.title}
+            description={milestone.description}
+            image={milestone.image}
+            index={i}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

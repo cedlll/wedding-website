@@ -1,0 +1,25 @@
+---
+import RsvpForm from "../islands/RsvpForm";
+import LeafDivider from "../icons/LeafDivider.astro";
+import Stamp from "../scrapbook/Stamp.astro";
+---
+
+<section id="rsvp" class="py-24 px-6" style="background-color: var(--paper-deep);">
+  <div class="max-w-3xl mx-auto relative">
+    <!-- Stamp decoration -->
+    <div class="absolute -top-4 right-0 md:right-8 opacity-30">
+      <Stamp text="RSVP" class="w-20 h-20" />
+    </div>
+
+    <!-- Section label -->
+    <div class="text-center mb-16">
+      <span class="section-label">05 · RSVP</span>
+      <h2 class="font-display text-4xl md:text-5xl font-light mt-4" style="color: var(--wood-deep);">
+        Will You Be There?
+      </h2>
+      <LeafDivider class="max-w-xs mx-auto mt-6" />
+    </div>
+
+    <RsvpForm client:visible />
+  </div>
+</section>

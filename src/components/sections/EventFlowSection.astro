@@ -1,0 +1,19 @@
+---
+import EventFlow from "../islands/EventFlow";
+import LeafDivider from "../icons/LeafDivider.astro";
+---
+
+<section id="event-flow" class="py-24 px-6" style="background-color: var(--paper-deep);">
+  <div class="max-w-4xl mx-auto">
+    <!-- Section label -->
+    <div class="text-center mb-16">
+      <span class="section-label">03 · The Schedule</span>
+      <h2 class="font-display text-4xl md:text-5xl font-light mt-4" style="color: var(--wood-deep);">
+        Event Flow
+      </h2>
+      <LeafDivider class="max-w-xs mx-auto mt-6" />
+    </div>
+
+    <EventFlow client:visible />
+  </div>
+</section>
