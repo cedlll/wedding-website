@@ -1,0 +1,47 @@
+---
+import config from "../../lib/wedding-config";
+
+// Use first 4 gallery photos for portfolio grid
+const portfolioItems = config.gallery.photos.slice(0, 4);
+---
+
+<section id="gallery" class="py-24 md:py-32 px-6" style="background-color: var(--white);">
+  <div class="max-w-7xl mx-auto">
+    <!-- Section header -->
+    <div class="text-center mb-20">
+      <p class="label-text mb-4" style="color: var(--gold);">Moments</p>
+      <h2
+        class="font-display text-5xl md:text-6xl mb-6"
+        style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
+      >
+        Our Journey in Photos
+      </h2>
+      <div class="divider-line mt-6"></div>
+    </div>
+
+    <!-- Portfolio Grid: 2x2 layout -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+      {portfolioItems.map((photo, i) => (
+        <div class="group cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden mb-6">
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <h3
+            class="font-display text-2xl mb-3 transition-colors duration-300 group-hover:text-gold"
+            style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
+          >
+            Chapter {i + 1}
+          </h3>
+          <p class="text-sm font-body" style="color: var(--text-muted);">
+            {photo.alt}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

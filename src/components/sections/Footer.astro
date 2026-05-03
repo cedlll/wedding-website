@@ -1,20 +1,58 @@
 ---
-import LeafDivider from "../icons/LeafDivider.astro";
 import config from "../../lib/wedding-config";
 ---
 
-<footer class="py-16 px-6 text-center" style="background-color: var(--paper);">
-  <LeafDivider class="max-w-md mx-auto mb-12" />
+<footer class="py-20 md:py-28 px-6" style="background-color: var(--charcoal);">
+  <div class="max-w-5xl mx-auto">
+    <!-- Nav links -->
+    <div class="flex flex-wrap justify-center gap-8 md:gap-12 mb-16">
+      <a
+        href="#our-story"
+        class="text-xs font-medium tracking-wider uppercase transition-all hover:text-gold-light"
+        style="color: var(--cream); opacity: 0.8; letter-spacing: 0.12em;"
+      >
+        Our Story
+      </a>
+      <a
+        href="#the-day"
+        class="text-xs font-medium tracking-wider uppercase transition-all hover:text-gold-light"
+        style="color: var(--cream); opacity: 0.8; letter-spacing: 0.12em;"
+      >
+        The Day
+      </a>
+      <a
+        href="#faq"
+        class="text-xs font-medium tracking-wider uppercase transition-all hover:text-gold-light"
+        style="color: var(--cream); opacity: 0.8; letter-spacing: 0.12em;"
+      >
+        FAQ
+      </a>
+      <a
+        href="#rsvp"
+        class="text-xs font-medium tracking-wider uppercase transition-all hover:text-gold-light"
+        style="color: var(--cream); opacity: 0.8; letter-spacing: 0.12em;"
+      >
+        RSVP
+      </a>
+    </div>
 
-  <p class="font-script text-4xl mb-4" style="color: var(--gold);">
-    {config.couple.partner1} &amp; {config.couple.partner2}
-  </p>
+    <!-- Divider -->
+    <div class="w-20 h-px mx-auto mb-12" style="background-color: var(--gold); opacity: 0.4;"></div>
 
-  <p class="font-mono-micro mb-8" style="color: var(--olive-soft);">
-    {config.date.display} · {config.venue.name}, {config.venue.city}
-  </p>
-
-  <p class="font-mono-micro" style="color: var(--olive-soft); opacity: 0.6; font-size: 10px;">
-    Made with love in Manila
-  </p>
+    <!-- Couple names -->
+    <div class="text-center">
+      <p
+        class="font-display text-3xl md:text-4xl mb-4"
+        style="color: var(--cream); letter-spacing: 0.03em; font-weight: 400;"
+      >
+        {config.couple.partner1} & {config.couple.partner2}
+      </p>
+      <p class="text-xs font-medium tracking-wider uppercase" style="color: var(--cream); opacity: 0.6; letter-spacing: 0.15em;">
+        {config.date.display}
+      </p>
+      <p class="text-sm mt-3 font-body" style="color: var(--cream); opacity: 0.5;">
+        {config.venue.city}, {config.venue.country}
+      </p>
+    </div>
+  </div>
 </footer>

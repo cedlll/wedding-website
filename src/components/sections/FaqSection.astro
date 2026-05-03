@@ -1,17 +1,19 @@
 ---
 import FaqAccordion from "../islands/FaqAccordion";
-import LeafDivider from "../icons/LeafDivider.astro";
 ---
 
-<section id="faq" class="py-24 px-6" style="background-color: var(--paper-deep);">
+<section id="faq" class="py-24 md:py-32 px-6" style="background-color: var(--white);">
   <div class="max-w-3xl mx-auto">
-    <!-- Section label -->
-    <div class="text-center mb-16">
-      <span class="section-label">07 · FAQ</span>
-      <h2 class="font-display text-4xl md:text-5xl font-light mt-4" style="color: var(--wood-deep);">
-        Common Questions
+    <!-- Section header -->
+    <div class="text-center mb-20 md:mb-24">
+      <p class="label-text mb-4" style="color: var(--gold);">Information</p>
+      <h2
+        class="font-display text-5xl md:text-6xl"
+        style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
+      >
+        Frequently Asked Questions
       </h2>
-      <LeafDivider class="max-w-xs mx-auto mt-6" />
+      <div class="divider-line mt-8"></div>
     </div>
 
     <FaqAccordion client:visible />

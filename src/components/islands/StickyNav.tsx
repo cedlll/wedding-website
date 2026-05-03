@@ -1,127 +1,154 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const sections = [
-  { id: "our-story", label: "Story" },
-  { id: "details", label: "Details" },
-  { id: "event-flow", label: "Schedule" },
-  { id: "gallery", label: "Gallery" },
-  { id: "rsvp", label: "RSVP" },
-  { id: "gifts", label: "Gifts" },
+  { id: "our-story", label: "Our Story" },
+  { id: "the-day", label: "The Day" },
   { id: "faq", label: "FAQ" },
-  { id: "contact", label: "Contact" },
+  { id: "rsvp", label: "RSVP" },
 ];
 
 export default function StickyNav() {
-  const [visible, setVisible] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-  const lastScrollY = useRef(0);
-  const scrollDirection = useRef<"up" | "down">("down");
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const heroHeight = window.innerHeight;
-
     const handleScroll = () => {
-      const currentY = window.scrollY;
-      const delta = currentY - lastScrollY.current;
-
-      if (delta > 30) scrollDirection.current = "down";
-      else if (delta < -10) scrollDirection.current = "up";
-
-      const pastHero = currentY > heroHeight * 0.8;
-      setVisible(pastHero && scrollDirection.current === "up");
-
-      lastScrollY.current = currentY;
+      setScrolled(window.scrollY > 80);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.nav
-          className="fixed top-0 left-0 right-0 z-40 py-3 px-6"
-          style={{
-            backgroundColor: "rgba(250,247,240,0.95)",
-            backdropFilter: "blur(4px)",
-            borderBottom: "1px solid rgba(107,79,58,0.1)",
-          }}
-          initial={{ y: -60, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -60, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          aria-label="Section navigation"
-        >
-          <div className="max-w-6xl mx-auto flex items-center justify-between">
-            <a
-              href="#"
-              className="font-script text-xl"
-              style={{ color: "var(--gold)" }}
-              aria-label="Back to top"
-            >
-              C &amp; K
-            </a>
+    <>
+      <motion.nav
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={{
+          backgroundColor: scrolled ? "rgba(255, 255, 255, 0.95)" : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(232, 228, 222, 0.6)" : "1px solid transparent",
+        }}
+        aria-label="Main navigation"
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
+          <motion.a
+            href="#"
+            className={`font-display text-xl transition-colors duration-300 ${
+              scrolled || menuOpen ? "text-charcoal" : "text-white"
+            }`}
+            style={{ zIndex: 60, position: "relative", letterSpacing: "0.05em" }}
+            aria-label="Back to top"
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2 }}
+          >
+            C & K
+          </motion.a>
 
-            <div className="hidden md:flex items-center gap-6">
-              {sections.map(({ id, label }) => (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  className="font-mono-micro relative transition-colors duration-200"
-                  style={{
-                    color: activeSection === id ? "var(--olive)" : "var(--wood)",
-                  }}
-                >
-                  {label}
-                  {activeSection === id && (
-                    <motion.div
-                      className="absolute -bottom-1 left-0 right-0 h-px"
-                      style={{ backgroundColor: "var(--olive)" }}
-                      layoutId="nav-underline"
-                    />
-                  )}
-                </a>
-              ))}
-            </div>
-
-            {/* Mobile: simplified nav */}
-            <div className="md:hidden">
-              <a
-                href="#rsvp"
-                className="font-mono-micro px-3 py-1 rounded-sm"
-                style={{
-                  backgroundColor: "var(--olive)",
-                  color: "var(--paper)",
-                }}
+          <div className="hidden md:flex items-center gap-12">
+            {sections.map(({ id, label }) => (
+              <motion.a
+                key={id}
+                href={`#${id}`}
+                className={`text-xs font-medium tracking-wider uppercase transition-colors duration-300 relative ${
+                  scrolled ? "text-charcoal" : "text-white"
+                }`}
+                style={{ letterSpacing: "0.12em" }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                RSVP
-              </a>
-            </div>
+                {label}
+                <motion.span
+                  className="absolute -bottom-1 left-0 right-0 h-px"
+                  style={{
+                    backgroundColor: scrolled ? "var(--gold)" : "white",
+                  }}
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                />
+              </motion.a>
+            ))}
           </div>
-        </motion.nav>
-      )}
-    </AnimatePresence>
+
+          <motion.button
+            className="md:hidden flex flex-col gap-1.5 p-2 relative"
+            style={{ zIndex: 60 }}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            whileTap={{ scale: 0.9 }}
+          >
+            <motion.span
+              className={`block w-6 h-px transition-colors duration-500 ${
+                scrolled || menuOpen ? "bg-charcoal" : "bg-white"
+              }`}
+              animate={menuOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            />
+            <motion.span
+              className={`block w-6 h-px transition-colors duration-500 ${
+                scrolled || menuOpen ? "bg-charcoal" : "bg-white"
+              }`}
+              animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            />
+            <motion.span
+              className={`block w-6 h-px transition-colors duration-500 ${
+                scrolled || menuOpen ? "bg-charcoal" : "bg-white"
+              }`}
+              animate={menuOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            />
+          </motion.button>
+        </div>
+      </motion.nav>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10"
+            style={{ backgroundColor: "var(--cream)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            {sections.map(({ id, label }, i) => (
+              <motion.a
+                key={id}
+                href={`#${id}`}
+                className="font-display text-4xl relative"
+                style={{ color: "var(--charcoal)", letterSpacing: "0.02em" }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{
+                  delay: i * 0.08,
+                  duration: 0.5,
+                  ease: "easeOut"
+                }}
+                whileHover={{
+                  x: 8,
+                  color: "var(--gold)",
+                }}
+                onClick={() => setMenuOpen(false)}
+              >
+                {label}
+              </motion.a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

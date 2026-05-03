@@ -1,143 +1,100 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import config from "../../lib/wedding-config";
 
-function usePrefersReducedMotion() {
-  const [prefersReduced, setPrefersReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReduced(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-  return prefersReduced;
-}
+// Hero carousel images
+const heroImages = [
+  config.images.hero,
+  "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop",
+  "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1920&h=1080&fit=crop",
+];
 
 export default function HeroAnimation() {
-  const ref = useRef<HTMLDivElement>(null);
-  const prefersReduced = usePrefersReducedMotion();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const smoothImageY = useSpring(imageY, { stiffness: 100, damping: 30 });
-
-  const springConfig = { type: "spring" as const, stiffness: 120, damping: 20 };
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Hero background photo */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{ y: prefersReduced ? 0 : smoothImageY }}
-      >
-        <div
-          className="w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: "url(/images/prenup/01.jpg)" }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(to right, rgba(250,247,240,0.75) 0%, rgba(250,247,240,0.4) 50%, transparent 100%)",
-          }}
-        />
-      </motion.div>
+    <div className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Image Carousel */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          className="absolute inset-0 z-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+        >
+          <img
+            src={heroImages[currentIndex]}
+            alt=""
+            className="w-full h-full object-cover"
+            fetchPriority={currentIndex === 0 ? "high" : "low"}
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Carousel Indicators */}
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {heroImages.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            className="w-2 h-2 rounded-full transition-all duration-300"
+            style={{
+              backgroundColor: i === currentIndex ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0.3)",
+              width: i === currentIndex ? "32px" : "8px",
+            }}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 py-20">
-        {/* Date & city */}
-        <motion.p
-          className="font-mono-micro mb-8"
-          style={{ color: "var(--olive-soft)" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.3, duration: 0.4 }}
-        >
-          {config.date.display.toLowerCase()} · {config.venue.city.toLowerCase()}
-        </motion.p>
-
-        {/* Partner 1 name */}
+      <motion.div
+        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.3 }}
+      >
         <motion.h1
-          className="font-display font-light leading-none"
-          style={{ fontSize: "clamp(4rem, 8vw, 7rem)", color: "var(--wood-deep)" }}
-          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, x: -80 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ ...springConfig, delay: 0.2, duration: 0.9 }}
+          className="font-display text-white leading-tight mb-6"
+          style={{ fontSize: "clamp(3.5rem, 10vw, 7rem)", letterSpacing: "0.03em", fontWeight: 400 }}
         >
-          {config.couple.partner1}
+          {config.couple.partner1} <span className="text-6xl mx-2">&</span> {config.couple.partner2}
         </motion.h1>
 
-        {/* Ampersand */}
-        <motion.span
-          className="font-script block my-2"
-          style={{ fontSize: "clamp(3rem, 6vw, 5rem)", color: "var(--gold)" }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.3 }}
-        >
-          &amp;
-        </motion.span>
-
-        {/* Partner 2 name */}
-        <motion.h1
-          className="font-display font-light leading-none"
-          style={{ fontSize: "clamp(4rem, 8vw, 7rem)", color: "var(--wood-deep)" }}
-          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, x: 80 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ ...springConfig, delay: 0.2, duration: 0.9 }}
-        >
-          {config.couple.partner2}
-        </motion.h1>
-
-        {/* Subtitle */}
         <motion.p
-          className="font-body italic mt-8 text-lg"
-          style={{ color: "var(--wood-deep)" }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.3, duration: 0.4 }}
+          className="text-white/90 text-lg md:text-xl mb-3"
+          style={{ letterSpacing: "0.08em" }}
         >
-          invite you to celebrate with them
+          {config.date.display}
         </motion.p>
 
-        {/* CTA */}
+        <motion.p
+          className="text-white/80 text-base mb-10"
+          style={{ letterSpacing: "0.05em" }}
+        >
+          {config.venue.name}, {config.venue.city}
+        </motion.p>
+
         <motion.a
-          href="#our-story"
-          className="inline-block mt-10 px-8 py-3 font-mono-micro transition-colors duration-300"
-          style={{
-            border: "1px solid var(--wood)",
-            color: "var(--wood)",
-            borderRadius: "2px",
-          }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 0.4 }}
-          whileHover={{
-            backgroundColor: "var(--olive)",
-            color: "var(--paper)",
-            borderColor: "var(--olive)",
-          }}
+          href="#details"
+          className="inline-block px-12 py-4 text-xs font-semibold tracking-wider uppercase border-2 border-white text-white bg-transparent transition-all duration-300 hover:bg-white hover:text-charcoal"
+          style={{ letterSpacing: "0.15em" }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
-          Open the Invitation
+          View Details
         </motion.a>
-
-        {/* Scroll cue */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.5 }}
-        >
-          <span className="font-mono-micro" style={{ color: "var(--wood)", opacity: 0.4 }}>
-            scroll
-          </span>
-          <div className="scroll-cue-line" />
-        </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 }

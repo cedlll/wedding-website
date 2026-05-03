@@ -1,16 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import config from "../../lib/wedding-config";
-import CountdownTimer from "./CountdownTimer";
-
-type MealOption = "Chicken" | "Fish" | "Vegetarian";
 
 export default function RsvpForm() {
   const [name, setName] = useState("");
   const [attending, setAttending] = useState<boolean | null>(null);
   const [guestCount, setGuestCount] = useState(1);
-  const [meal, setMeal] = useState<MealOption | null>(null);
-  const [songRequest, setSongRequest] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -24,10 +19,8 @@ export default function RsvpForm() {
     const fields = config.rsvp.googleFormFields;
     const formData = new URLSearchParams();
     formData.append(fields.name, name);
-    formData.append(fields.attending, attending ? "Yes, joyfully" : "Regretfully unable");
+    formData.append(fields.attending, attending ? "Yes" : "No");
     formData.append(fields.guestCount, guestCount.toString());
-    if (meal) formData.append(fields.mealPreference, meal);
-    if (songRequest) formData.append(fields.songRequest, songRequest);
     if (message) formData.append(fields.message, message);
 
     try {
@@ -38,7 +31,7 @@ export default function RsvpForm() {
         body: formData.toString(),
       });
     } catch {
-      // Google Forms returns opaque response — treat any result as success
+      // Google Forms returns opaque response
     }
 
     setSubmitting(false);
@@ -46,32 +39,25 @@ export default function RsvpForm() {
   };
 
   return (
-    <div className="max-w-xl mx-auto">
-      <CountdownTimer />
-
+    <div className="max-w-md mx-auto">
       <AnimatePresence mode="wait">
         {submitted ? (
           <motion.div
             key="success"
-            className="text-center py-16 px-8 card-bordered rounded-sm"
-            initial={{ opacity: 0, scaleY: 0 }}
-            animate={{ opacity: 1, scaleY: 1 }}
-            transition={{ type: "spring", stiffness: 150, damping: 20, duration: 0.6 }}
-            style={{ transformOrigin: "bottom" }}
+            className="text-center py-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            {/* Botanical illustration */}
-            <svg viewBox="0 0 120 60" className="w-24 h-12 mx-auto mb-6" fill="none" aria-hidden="true">
-              <path d="M20 50 C40 45, 60 30, 100 15" stroke="var(--olive)" strokeWidth="1.25" strokeLinecap="round" />
-              <path d="M45 40 C43 34, 50 28, 53 32 C56 36, 48 42, 45 40Z" stroke="var(--olive)" strokeWidth="1.25" />
-              <path d="M65 30 C63 24, 70 18, 73 22 C76 26, 68 32, 65 30Z" stroke="var(--olive)" strokeWidth="1.25" />
-              <path d="M82 22 C80 16, 87 10, 90 14 C93 18, 85 24, 82 22Z" stroke="var(--olive)" strokeWidth="1.25" />
-            </svg>
-
-            <p className="font-script text-4xl mb-4" style={{ color: "var(--gold)" }}>
-              See you on the 7th!
+            <div className="divider-line mb-8" />
+            <p
+              className="font-display text-4xl md:text-5xl mb-4"
+              style={{ color: "var(--charcoal)", letterSpacing: "0.02em", fontWeight: 400 }}
+            >
+              Thank You
             </p>
-            <p className="font-display text-2xl font-light" style={{ color: "var(--wood-deep)" }}>
-              {config.couple.partner1} &amp; {config.couple.partner2}
+            <p className="text-base font-body" style={{ color: "var(--text-muted)", lineHeight: 1.7 }}>
+              We can't wait to celebrate with you.
             </p>
           </motion.div>
         ) : (
@@ -79,183 +65,204 @@ export default function RsvpForm() {
             key="form"
             onSubmit={handleSubmit}
             className="space-y-8"
-            exit={{ opacity: 0, scaleY: 0 }}
-            transition={{ duration: 0.4 }}
-            style={{ transformOrigin: "top" }}
+            exit={{ opacity: 0 }}
           >
             {/* Name */}
-            <div>
-              <label className="section-label block mb-2" htmlFor="rsvp-name">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              <label className="label-text block mb-3" htmlFor="rsvp-name">
                 Full Name
               </label>
-              <input
+              <motion.input
                 id="rsvp-name"
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 bg-paper-deep border font-body rounded-sm focus:outline-none focus:ring-2 focus:ring-olive"
-                style={{ borderColor: "rgba(107,79,58,0.22)" }}
+                className="w-full px-0 py-3 bg-transparent border-0 border-b text-base focus:outline-none focus:ring-0 transition-all duration-300"
+                style={{
+                  borderColor: "var(--divider)",
+                  color: "var(--charcoal)",
+                }}
+                whileFocus={{
+                  borderColor: "var(--gold)",
+                  scale: 1.01
+                }}
                 placeholder="Your full name"
               />
-            </div>
+            </motion.div>
 
             {/* Attending */}
-            <div>
-              <span className="section-label block mb-3">Will you be attending?</span>
-              <div className="grid grid-cols-2 gap-4">
-                <button
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              <span className="label-text block mb-4">Will you attend?</span>
+              <div className="flex gap-4">
+                <motion.button
                   type="button"
                   onClick={() => setAttending(true)}
-                  className={`p-4 text-center rounded-sm transition-all font-body ${
-                    attending === true
-                      ? "ring-2 ring-olive shadow-warm-sm"
-                      : "hover:shadow-warm-sm"
-                  }`}
+                  className="flex-1 py-4 text-center text-xs font-semibold tracking-wider uppercase transition-all duration-400 relative overflow-hidden"
                   style={{
-                    backgroundColor: attending === true ? "rgba(74,93,58,0.08)" : "var(--paper-deep)",
-                    border: "var(--border-card)",
+                    border: "2px solid var(--charcoal)",
+                    backgroundColor:
+                      attending === true ? "var(--charcoal)" : "transparent",
+                    color:
+                      attending === true ? "var(--white)" : "var(--charcoal)",
+                    letterSpacing: "0.12em"
                   }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <span className="block text-lg mb-1">Yes, joyfully</span>
-                  <span className="text-xs" style={{ color: "var(--olive-soft)" }}>🌿</span>
-                </button>
-                <button
+                  Joyfully Accept
+                </motion.button>
+                <motion.button
                   type="button"
                   onClick={() => setAttending(false)}
-                  className={`p-4 text-center rounded-sm transition-all font-body ${
-                    attending === false
-                      ? "ring-2 ring-olive shadow-warm-sm"
-                      : "hover:shadow-warm-sm"
-                  }`}
+                  className="flex-1 py-4 text-center text-xs font-semibold tracking-wider uppercase transition-all duration-400 relative overflow-hidden"
                   style={{
-                    backgroundColor: attending === false ? "rgba(74,93,58,0.08)" : "var(--paper-deep)",
-                    border: "var(--border-card)",
+                    border: "2px solid var(--charcoal)",
+                    backgroundColor:
+                      attending === false ? "var(--charcoal)" : "transparent",
+                    color:
+                      attending === false ? "var(--white)" : "var(--charcoal)",
+                    letterSpacing: "0.12em"
                   }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <span className="block text-lg mb-1">Regretfully unable</span>
-                  <span className="text-xs" style={{ color: "var(--olive-soft)" }}>🍂</span>
-                </button>
+                  Regretfully Decline
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Conditional fields for attending */}
+            {/* Guest count (conditional) */}
             <AnimatePresence>
               {attending === true && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="space-y-8 overflow-hidden"
+                  transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className="overflow-hidden space-y-8"
                 >
-                  {/* Guest count */}
                   <div>
-                    <label className="section-label block mb-2" htmlFor="rsvp-guests">
+                    <label
+                      className="label-text block mb-3"
+                      htmlFor="rsvp-guests"
+                    >
                       Number of Guests
                     </label>
-                    <div className="flex items-center gap-4">
-                      <button
+                    <div className="flex items-center gap-6">
+                      <motion.button
                         type="button"
-                        onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
-                        className="w-10 h-10 rounded-full flex items-center justify-center font-display text-xl"
-                        style={{ border: "var(--border-card)", color: "var(--wood)" }}
+                        onClick={() =>
+                          setGuestCount(Math.max(1, guestCount - 1))
+                        }
+                        className="w-10 h-10 flex items-center justify-center text-lg transition-colors"
+                        style={{
+                          border: "1px solid var(--divider)",
+                          color: "var(--charcoal)",
+                        }}
+                        whileHover={{ scale: 1.1, borderColor: "var(--gold)" }}
+                        whileTap={{ scale: 0.9 }}
                         aria-label="Decrease guest count"
                       >
-                        −
-                      </button>
-                      <span
-                        className="font-display text-3xl font-light w-12 text-center"
-                        style={{ color: "var(--wood-deep)" }}
+                        &minus;
+                      </motion.button>
+                      <motion.span
+                        className="font-display text-3xl w-8 text-center"
+                        style={{ color: "var(--charcoal)", letterSpacing: "0.02em", fontWeight: 400 }}
                         id="rsvp-guests"
+                        key={guestCount}
+                        initial={{ scale: 1.2, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.3, ease: [0.68, -0.55, 0.265, 1.55] }}
                       >
                         {guestCount}
-                      </span>
-                      <button
+                      </motion.span>
+                      <motion.button
                         type="button"
-                        onClick={() => setGuestCount(Math.min(6, guestCount + 1))}
-                        className="w-10 h-10 rounded-full flex items-center justify-center font-display text-xl"
-                        style={{ border: "var(--border-card)", color: "var(--wood)" }}
+                        onClick={() =>
+                          setGuestCount(Math.min(6, guestCount + 1))
+                        }
+                        className="w-10 h-10 flex items-center justify-center text-lg transition-colors"
+                        style={{
+                          border: "1px solid var(--divider)",
+                          color: "var(--charcoal)",
+                        }}
+                        whileHover={{ scale: 1.1, borderColor: "var(--gold)" }}
+                        whileTap={{ scale: 0.9 }}
                         aria-label="Increase guest count"
                       >
                         +
-                      </button>
+                      </motion.button>
                     </div>
-                  </div>
-
-                  {/* Meal preference */}
-                  <div>
-                    <span className="section-label block mb-3">Meal Preference</span>
-                    <div className="grid grid-cols-3 gap-3">
-                      {(["Chicken", "Fish", "Vegetarian"] as MealOption[]).map((option) => (
-                        <button
-                          key={option}
-                          type="button"
-                          onClick={() => setMeal(option)}
-                          className={`p-3 text-center rounded-sm transition-all font-body text-sm ${
-                            meal === option
-                              ? "ring-2 ring-olive shadow-warm-sm"
-                              : "hover:shadow-warm-sm"
-                          }`}
-                          style={{
-                            backgroundColor: meal === option ? "rgba(74,93,58,0.08)" : "var(--paper-deep)",
-                            border: "var(--border-card)",
-                          }}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Song request */}
-                  <div>
-                    <label className="section-label block mb-2" htmlFor="rsvp-song">
-                      Song Request <span className="normal-case" style={{ color: "var(--olive-soft)" }}>(optional)</span>
-                    </label>
-                    <input
-                      id="rsvp-song"
-                      type="text"
-                      value={songRequest}
-                      onChange={(e) => setSongRequest(e.target.value)}
-                      className="w-full px-4 py-3 bg-paper-deep border font-body rounded-sm focus:outline-none focus:ring-2 focus:ring-olive"
-                      style={{ borderColor: "rgba(107,79,58,0.22)" }}
-                      placeholder="A song that makes you dance"
-                    />
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
 
             {/* Message */}
-            <div>
-              <label className="section-label block mb-2" htmlFor="rsvp-message">
-                Message for {config.couple.partner1} &amp; {config.couple.partner2}{" "}
-                <span className="normal-case" style={{ color: "var(--olive-soft)" }}>(optional)</span>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              <label className="label-text block mb-3" htmlFor="rsvp-message">
+                Message{" "}
+                <span className="normal-case opacity-60">(optional)</span>
               </label>
-              <textarea
+              <motion.textarea
                 id="rsvp-message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                rows={4}
-                className="w-full px-4 py-3 bg-paper-deep border font-body rounded-sm lined-card resize-none focus:outline-none focus:ring-2 focus:ring-olive"
-                style={{ borderColor: "rgba(107,79,58,0.22)" }}
+                rows={3}
+                className="w-full px-0 py-3 bg-transparent border-0 border-b text-base resize-none focus:outline-none focus:ring-0 transition-all duration-300"
+                style={{
+                  borderColor: "var(--divider)",
+                  color: "var(--charcoal)",
+                }}
+                whileFocus={{
+                  borderColor: "var(--gold)",
+                  scale: 1.01
+                }}
                 placeholder="A few words for the couple..."
               />
-            </div>
+            </motion.div>
 
             {/* Submit */}
-            <button
+            <motion.button
               type="submit"
               disabled={!name || attending === null || submitting}
-              className="w-full py-4 font-mono-micro rounded-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 text-xs font-semibold tracking-wider uppercase transition-all duration-400 disabled:opacity-40 disabled:cursor-not-allowed relative overflow-hidden"
               style={{
-                backgroundColor: "var(--olive)",
-                color: "var(--paper)",
-                border: "1px solid var(--olive)",
+                backgroundColor: "var(--charcoal)",
+                color: "var(--white)",
+                border: "2px solid var(--charcoal)",
+                letterSpacing: "0.15em"
               }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              whileHover={!submitting && name && attending !== null ? { scale: 1.02 } : {}}
+              whileTap={!submitting && name && attending !== null ? { scale: 0.98 } : {}}
             >
-              {submitting ? "Sending..." : "Send RSVP"}
-            </button>
+              {submitting && (
+                <motion.span
+                  className="inline-block mr-2"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                >
+                  ⟳
+                </motion.span>
+              )}
+              {submitting ? "Sending..." : "Confirm RSVP"}
+            </motion.button>
           </motion.form>
         )}
       </AnimatePresence>

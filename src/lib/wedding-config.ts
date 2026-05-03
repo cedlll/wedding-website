@@ -5,31 +5,47 @@ export interface WeddingConfig {
   };
   date: {
     display: string;
+    dayOfWeek: string;
     iso: string;
-    ceremony: string;
-    reception: string;
     rsvpDeadline: string;
     rsvpDeadlineIso: string;
   };
   venue: {
     name: string;
     city: string;
+    country: string;
     fullAddress: string;
     googleMapsUrl: string;
-    ceremonyRoom: string;
-    receptionRoom: string;
   };
-  dresscode: {
-    theme: string;
-    description: string;
-    palette: string[];
-    paletteLabels: string[];
-    avoid: string[];
-  };
+  tagline: string;
   eventFlow: Array<{
     time: string;
     title: string;
     description: string;
+  }>;
+  attire: {
+    theme: string;
+    description: string;
+    colorPalette: Array<{
+      name: string;
+      hex: string;
+    }>;
+    men: {
+      title: string;
+      description: string;
+      image: string;
+    };
+    women: {
+      title: string;
+      description: string;
+      image: string;
+    };
+  };
+  gifts: Array<{
+    label: string;
+    accountName: string;
+    accountNumber: string;
+    qrImagePath: string;
   }>;
   rsvp: {
     googleFormUrl: string;
@@ -42,21 +58,20 @@ export interface WeddingConfig {
       message: string;
     };
   };
-  gifts: Array<{
-    label: string;
-    accountName: string;
-    accountNumber: string;
-    qrImagePath: string;
-  }>;
   faqs: Array<{
     question: string;
     answer: string;
   }>;
-  contacts: Array<{
-    name: string;
-    role: string;
-    phone: string;
-    email: string;
+  story: Array<{
+    year: string;
+    title: string;
+    description: string;
+    image: string;
+  }>;
+  experience: Array<{
+    title: string;
+    description: string;
+    image: string;
   }>;
   gallery: {
     photos: Array<{
@@ -64,12 +79,10 @@ export interface WeddingConfig {
       alt: string;
     }>;
   };
-  story: Array<{
-    date: string;
-    title: string;
-    description: string;
-    image: string;
-  }>;
+  images: {
+    hero: string;
+    storyDivider: string;
+  };
 }
 
 const config: WeddingConfig = {
@@ -80,9 +93,8 @@ const config: WeddingConfig = {
 
   date: {
     display: "November 7, 2026",
+    dayOfWeek: "Saturday",
     iso: "2026-11-07",
-    ceremony: "3:00 PM",
-    reception: "6:00 PM",
     rsvpDeadline: "October 1, 2026",
     rsvpDeadlineIso: "2026-10-01",
   },
@@ -90,72 +102,63 @@ const config: WeddingConfig = {
   venue: {
     name: "Hacienda Solange",
     city: "Tagaytay City",
+    country: "Philippines",
     fullAddress: "// TODO: full address",
     googleMapsUrl: "// TODO: Google Maps link",
-    ceremonyRoom: "// TODO: e.g. The Chapel",
-    receptionRoom: "// TODO: e.g. The Garden Hall",
   },
 
-  dresscode: {
-    theme: "Garden Formal",
-    description: "// TODO: one-sentence description of the dress code",
-    palette: ["#4A5D3A", "#C8B8A2", "#E8DDD0", "#7A8B6A", "#D4C5B0"],
-    paletteLabels: ["Forest", "Linen", "Ivory", "Sage", "Sand"],
-    avoid: ["White", "Black", "Neon colors"],
-  },
+  tagline:
+    "Our story has been written with love, and this day marks the start of its most beautiful chapter. We can't wait to celebrate it with you.",
 
   eventFlow: [
     {
-      time: "2:30 PM",
-      title: "Guests Arrive",
-      description: "// TODO: Welcome and seating",
-    },
-    {
       time: "3:00 PM",
-      title: "Ceremony Begins",
-      description: "// TODO: The exchange of vows",
+      title: "Wedding Ceremony",
+      description:
+        "Join us as we exchange our vows surrounded by the ones we love most. A moment of promises, unity, and the beginning of forever.",
     },
     {
-      time: "3:45 PM",
+      time: "4:00 PM",
       title: "Cocktail Hour",
-      description: "// TODO: Light bites and drinks in the garden",
+      description:
+        "Enjoy refreshing drinks and light appetizers while mingling with fellow guests in the garden as the golden hour sets in.",
     },
     {
-      time: "5:00 PM",
-      title: "Reception Starts",
-      description: "// TODO: Guests are seated for dinner",
+      time: "5:30 PM",
+      title: "Dinner Reception",
+      description:
+        "A celebration of love with heartfelt toasts, a curated dinner, and stories shared over candlelit tables under the stars.",
     },
     {
-      time: "6:00 PM",
-      title: "Dinner Service",
-      description: "// TODO: Multi-course dinner with toasts",
-    },
-    {
-      time: "7:30 PM",
-      title: "First Dance",
-      description: "// TODO: The couple's first dance together",
-    },
-    {
-      time: "8:00 PM",
-      title: "Party & Dancing",
-      description: "// TODO: Open dance floor and celebration",
-    },
-    {
-      time: "10:00 PM",
-      title: "Send-Off",
-      description: "// TODO: Sparkler send-off",
+      time: "7:30 PM \u2013 Late",
+      title: "After Party",
+      description:
+        "The night is young and the dance floor awaits. Let loose, celebrate, and make memories that will last a lifetime.",
     },
   ],
 
-  rsvp: {
-    googleFormUrl: "// TODO: paste your Google Form URL here",
-    googleFormFields: {
-      name: "entry.XXXXXX",
-      attending: "entry.XXXXXX",
-      guestCount: "entry.XXXXXX",
-      mealPreference: "entry.XXXXXX",
-      songRequest: "entry.XXXXXX",
-      message: "entry.XXXXXX",
+  attire: {
+    theme: "Filipiniana Formal",
+    description:
+      "We invite our guests to honor Filipino heritage through elegant Filipiniana-inspired attire. Gentlemen in Barong Tagalog and ladies in modern Filipiniana or terno silhouettes, in our wedding color palette.",
+    colorPalette: [
+      { name: "Blush", hex: "#D4B5A7" },
+      { name: "Terracotta", hex: "#A56B5B" },
+      { name: "Forest", hex: "#3A4A3B" },
+      { name: "Moss", hex: "#A8B88F" },
+      { name: "Linen", hex: "#E8E0D5" },
+    ],
+    men: {
+      title: "For the Gentlemen",
+      description:
+        "A classic Barong Tagalog \u2014 either embroidered jusi or pi\u00f1a fabric \u2014 paired with dark slacks and leather shoes. Keep accessories minimal and elegant.",
+      image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=800&fit=crop&crop=top",
+    },
+    women: {
+      title: "For the Ladies",
+      description:
+        "A modern Filipiniana dress or terno with butterfly sleeves in soft, muted tones from our palette. Floor-length or tea-length silhouettes are both welcome.",
+      image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=800&fit=crop&crop=center",
     },
   },
 
@@ -180,113 +183,102 @@ const config: WeddingConfig = {
     },
   ],
 
+  rsvp: {
+    googleFormUrl: "// TODO: paste your Google Form URL here",
+    googleFormFields: {
+      name: "entry.XXXXXX",
+      attending: "entry.XXXXXX",
+      guestCount: "entry.XXXXXX",
+      mealPreference: "entry.XXXXXX",
+      songRequest: "entry.XXXXXX",
+      message: "entry.XXXXXX",
+    },
+  },
+
   faqs: [
     {
-      question: "Is there parking at Hacienda Solange?",
-      answer: "// TODO: parking details",
+      question: "What is the dress code?",
+      answer:
+        "Filipiniana Formal. Gentlemen in Barong Tagalog and ladies in modern Filipiniana or terno. Please refer to the Attire & Palette section for the approved color palette.",
+    },
+    {
+      question: "What time should I arrive?",
+      answer:
+        "We recommend arriving 15\u201330 minutes before the ceremony begins at 3:00 PM to get settled and find your seats.",
+    },
+    {
+      question: "Can I bring a plus one?",
+      answer:
+        "Due to limited seating, we kindly ask that only those named on the invitation attend. If you have questions, please reach out to us directly.",
+    },
+    {
+      question: "Is parking available?",
+      answer:
+        "Yes, complimentary parking is available at the venue. Attendants will guide you upon arrival.",
     },
     {
       question: "Are children welcome?",
-      answer: "// TODO: policy on children attending",
-    },
-    {
-      question: "Can I bring a plus-one?",
-      answer: "// TODO: plus-one policy",
-    },
-    {
-      question: "What is the dress code exactly?",
       answer:
-        "Garden Formal. Please refer to the Dress Code section above for the approved palette and what to avoid.",
-    },
-    {
-      question:
-        "Will there be a photographer? Can I take photos during the ceremony?",
-      answer: "// TODO: photography policy",
-    },
-    {
-      question: "Is there a gift registry?",
-      answer:
-        "We have a monetary gift option — please see the Gifts section above.",
-    },
-    {
-      question: "What if it rains?",
-      answer:
-        "Hacienda Solange has indoor contingency spaces. // TODO: add details",
-    },
-    {
-      question: "Will the ceremony be in English or Filipino?",
-      answer: "// TODO: language details",
-    },
-    {
-      question: "Will there be a livestream for guests who can't attend?",
-      answer: "// TODO: livestream details",
-    },
-    {
-      question: "How do I get to Hacienda Solange from Manila?",
-      answer: "// TODO: transportation tips, estimated travel time",
+        "While we love your little ones, this will be an adults-only celebration. We hope you understand and enjoy a night out!",
     },
   ],
 
-  contacts: [
+  story: [
     {
-      name: "// TODO: Contact 1 Name",
-      role: "// TODO: e.g. Wedding Coordinator",
-      phone: "// TODO: phone number",
-      email: "// TODO: email",
+      year: "2019",
+      title: "The First Hello",
+      description:
+        "What started as a chance encounter at a gathering of friends quickly became the most meaningful conversation of our lives. From that moment, everything changed.",
+      image: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&h=1000&fit=crop",
     },
     {
-      name: "// TODO: Contact 2 Name",
-      role: "// TODO: e.g. Best Man / Maid of Honor",
-      phone: "// TODO: phone number",
-      email: "// TODO: email",
+      year: "2024",
+      title: "The Proposal",
+      description:
+        "With the golden sun setting over the horizon and the sound of waves as our witness, one knee touched the sand and a forever question was asked.",
+      image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&h=1000&fit=crop",
+    },
+    {
+      year: "2026",
+      title: "The Celebration",
+      description:
+        "And now, surrounded by the people who mean the most to us, we begin the next chapter of our story \u2014 together, always.",
+      image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=1000&fit=crop",
+    },
+  ],
+
+  experience: [
+    {
+      title: "Explore Tagaytay",
+      description:
+        "Discover the cool mountain breeze, stunning views of Taal Lake, and charming cafes and restaurants that make Tagaytay a beloved destination.",
+      image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=800&fit=crop",
+    },
+    {
+      title: "Cozy Stays",
+      description:
+        "From boutique bed-and-breakfasts to hillside villas, find the perfect place to rest before or after the celebration.",
+      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=800&fit=crop",
+    },
+    {
+      title: "Spa & Wellness",
+      description:
+        "Treat yourself to a rejuvenating experience at one of Tagaytay's renowned wellness retreats and hot spring resorts.",
+      image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=800&fit=crop",
     },
   ],
 
   gallery: {
     photos: Array.from({ length: 12 }, (_, i) => ({
       src: `/images/prenup/${String(i + 1).padStart(2, "0")}.jpg`,
-      alt: `// TODO: describe pre-nup photo ${i + 1}`,
+      alt: `Cedric & Karen - Photo ${i + 1}`,
     })),
   },
 
-  story: [
-    {
-      date: "// TODO: e.g. March 2019",
-      title: "How We Met",
-      description: "// TODO: your story of how you first met",
-      image: "/images/prenup/01.jpg",
-    },
-    {
-      date: "// TODO: e.g. April 2019",
-      title: "First Date",
-      description: "// TODO: your first date story",
-      image: "/images/prenup/02.jpg",
-    },
-    {
-      date: "// TODO: e.g. December 2019",
-      title: "When I Knew",
-      description: "// TODO: the moment you knew",
-      image: "/images/prenup/03.jpg",
-    },
-    {
-      date: "// TODO: e.g. 2020-2024",
-      title: "The Adventures",
-      description: "// TODO: adventures you shared together",
-      image: "/images/prenup/04.jpg",
-    },
-    {
-      date: "// TODO: e.g. June 2025",
-      title: "He Asked",
-      description: "// TODO: the proposal story",
-      image: "/images/prenup/05.jpg",
-    },
-    {
-      date: "// TODO: e.g. Present Day",
-      title: "Now & Always",
-      description: "// TODO: looking forward to forever",
-      image: "/images/prenup/06.jpg",
-    },
-  ],
+  images: {
+    hero: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop",
+    storyDivider: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1920&h=600&fit=crop&crop=center",
+  },
 };
 
 export default config;

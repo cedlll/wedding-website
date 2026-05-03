@@ -1,62 +1,104 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Plus, X } from "lucide-react";
 import config from "../../lib/wedding-config";
 
-function FaqItem({ question, answer, isOpen, onToggle }: {
+function FaqItem({
+  question,
+  answer,
+  isOpen,
+  onToggle,
+  index,
+}: {
   question: string;
   answer: string;
   isOpen: boolean;
   onToggle: () => void;
+  index: number;
 }) {
   return (
-    <div
+    <motion.div
       className="border-b"
-      style={{ borderColor: "rgba(107,79,58,0.15)" }}
+      style={{ borderColor: "var(--divider)" }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        delay: index * 0.08,
+        duration: 0.5,
+        ease: "easeOut"
+      }}
     >
-      <button
+      <motion.button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-olive group"
+        className="w-full flex items-center justify-between py-7 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold group"
         aria-expanded={isOpen}
+        whileHover={{ x: 3 }}
+        transition={{ duration: 0.2 }}
       >
-        <span
-          className="font-display text-xl font-medium pr-4"
-          style={{ color: "var(--wood-deep)" }}
+        <motion.span
+          className="font-display text-xl md:text-2xl pr-8"
+          style={{ color: "var(--charcoal)", letterSpacing: "0.01em", fontWeight: 400 }}
+          animate={{
+            color: isOpen ? "var(--gold)" : "var(--charcoal)"
+          }}
+          transition={{ duration: 0.3 }}
         >
           {question}
-        </span>
-        <motion.span
-          animate={{ rotate: isOpen ? 45 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="flex-shrink-0"
-        >
-          {isOpen ? (
-            <X size={18} style={{ color: "var(--olive)" }} />
-          ) : (
-            <Plus size={18} style={{ color: "var(--olive-soft)" }} />
-          )}
         </motion.span>
-      </button>
+        <motion.span
+          className="flex-shrink-0 w-7 h-7 flex items-center justify-center"
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          whileHover={{ scale: 1.1 }}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <motion.line
+              x1="9" y1="3" x2="9" y2="15"
+              stroke="var(--charcoal)"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              animate={{
+                stroke: isOpen ? "var(--gold)" : "var(--charcoal)"
+              }}
+            />
+            <motion.line
+              x1="3" y1="9" x2="15" y2="9"
+              stroke="var(--charcoal)"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              animate={{
+                stroke: isOpen ? "var(--gold)" : "var(--charcoal)"
+              }}
+            />
+          </svg>
+        </motion.span>
+      </motion.button>
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{
+              height: { duration: 0.35, ease: "easeOut" },
+              opacity: { duration: 0.25, delay: 0.08 }
+            }}
             className="overflow-hidden"
           >
-            <p
-              className="font-body pb-5 pr-8 leading-relaxed"
-              style={{ color: "var(--wood-deep)", opacity: 0.85 }}
+            <motion.p
+              className="pb-7 pr-12 leading-relaxed text-base font-body"
+              style={{ color: "var(--text-muted)", lineHeight: 1.7 }}
+              initial={{ y: -8 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
             >
               {answer}
-            </p>
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
@@ -68,6 +110,7 @@ export default function FaqAccordion() {
       {config.faqs.map((faq, i) => (
         <FaqItem
           key={i}
+          index={i}
           question={faq.question}
           answer={faq.answer}
           isOpen={openIndex === i}

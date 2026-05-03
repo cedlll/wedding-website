@@ -1,41 +1,21 @@
 ---
-import TimelineCard from "../islands/TimelineCard";
-import LeafDivider from "../icons/LeafDivider.astro";
-import config from "../../lib/wedding-config";
+import StorySection from "../islands/StorySection";
 ---
 
-<section id="our-story" class="py-24 px-6">
-  <div class="max-w-5xl mx-auto">
-    <!-- Section label -->
-    <div class="text-center mb-16">
-      <span class="section-label">01 · Our Story</span>
-      <h2 class="font-display text-4xl md:text-5xl font-light mt-4" style="color: var(--wood-deep);">
-        How It All Began
+<section id="our-story" class="py-24 md:py-32 px-6" style="background-color: var(--cream);">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section header -->
+    <div class="text-center mb-20 md:mb-24">
+      <p class="label-text mb-4" style="color: var(--gold);">Our Journey</p>
+      <h2
+        class="font-display text-5xl md:text-6xl"
+        style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
+      >
+        Our Story
       </h2>
-      <LeafDivider class="max-w-xs mx-auto mt-6" />
+      <div class="divider-line mt-8"></div>
     </div>
 
-    <!-- Timeline -->
-    <div class="relative">
-      <!-- Center line (desktop) / left line (mobile) -->
-      <div
-        class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-px"
-        style="background-color: rgba(107,79,58,0.15);"
-        aria-hidden="true"
-      ></div>
-
-      <div class="pl-12 md:pl-0">
-        {config.story.map((milestone, i) => (
-          <TimelineCard
-            client:visible
-            date={milestone.date}
-            title={milestone.title}
-            description={milestone.description}
-            image={milestone.image}
-            index={i}
-          />
-        ))}
-      </div>
-    </div>
+    <StorySection client:visible />
   </div>
 </section>

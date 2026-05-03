@@ -1,23 +1,23 @@
 ---
 import RsvpForm from "../islands/RsvpForm";
-import LeafDivider from "../icons/LeafDivider.astro";
-import Stamp from "../scrapbook/Stamp.astro";
+import config from "../../lib/wedding-config";
 ---
 
-<section id="rsvp" class="py-24 px-6" style="background-color: var(--paper-deep);">
-  <div class="max-w-3xl mx-auto relative">
-    <!-- Stamp decoration -->
-    <div class="absolute -top-4 right-0 md:right-8 opacity-30">
-      <Stamp text="RSVP" class="w-20 h-20" />
-    </div>
-
-    <!-- Section label -->
-    <div class="text-center mb-16">
-      <span class="section-label">05 · RSVP</span>
-      <h2 class="font-display text-4xl md:text-5xl font-light mt-4" style="color: var(--wood-deep);">
-        Will You Be There?
+<section id="rsvp" class="py-24 md:py-32 px-6" style="background-color: var(--cream);">
+  <div class="max-w-3xl mx-auto">
+    <!-- Section header -->
+    <div class="text-center mb-20 md:mb-24">
+      <p class="label-text mb-4" style="color: var(--gold);">Join Us</p>
+      <h2
+        class="font-display text-5xl md:text-6xl"
+        style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
+      >
+        RSVP
       </h2>
-      <LeafDivider class="max-w-xs mx-auto mt-6" />
+      <div class="divider-line mt-8"></div>
+      <p class="mt-10 text-base font-body" style="color: var(--text-muted); line-height: 1.7;">
+        Please confirm your attendance before <span style="color: var(--charcoal); font-weight: 500;">{config.date.rsvpDeadline}</span>.
+      </p>
     </div>
 
     <RsvpForm client:visible />

@@ -1,0 +1,21 @@
+---
+import GiftRegistry from "../islands/GiftRegistry";
+---
+
+<section id="gifts" class="py-24 md:py-32 px-6" style="background-color: var(--cream);">
+  <div class="max-w-4xl mx-auto">
+    <!-- Section header -->
+    <div class="text-center mb-16 md:mb-20">
+      <p class="label-text mb-4">Generosity</p>
+      <h2
+        class="font-display text-section"
+        style="color: var(--charcoal);"
+      >
+        Gift Registry
+      </h2>
+      <div class="divider-line mt-6"></div>
+    </div>
+
+    <GiftRegistry client:visible />
+  </div>
+</section>
