@@ -2,57 +2,128 @@
 import config from "../../lib/wedding-config";
 ---
 
-<footer class="py-20 md:py-28 px-6" style="background-color: var(--charcoal);">
-  <div class="max-w-5xl mx-auto">
-    <!-- Nav links -->
-    <div class="flex flex-wrap justify-center gap-8 md:gap-12 mb-16">
-      <a
-        href="#our-story"
-        class="text-xs font-medium tracking-wider uppercase transition-all hover:text-gold-light"
-        style="color: var(--cream); opacity: 0.8; letter-spacing: 0.12em;"
-      >
-        Our Story
-      </a>
-      <a
-        href="#the-day"
-        class="text-xs font-medium tracking-wider uppercase transition-all hover:text-gold-light"
-        style="color: var(--cream); opacity: 0.8; letter-spacing: 0.12em;"
-      >
-        The Day
-      </a>
-      <a
-        href="#faq"
-        class="text-xs font-medium tracking-wider uppercase transition-all hover:text-gold-light"
-        style="color: var(--cream); opacity: 0.8; letter-spacing: 0.12em;"
-      >
-        FAQ
-      </a>
-      <a
-        href="#rsvp"
-        class="text-xs font-medium tracking-wider uppercase transition-all hover:text-gold-light"
-        style="color: var(--cream); opacity: 0.8; letter-spacing: 0.12em;"
-      >
-        RSVP
-      </a>
+<footer style="background-color: var(--charcoal); position: relative; overflow: hidden;">
+  <!-- Ghost names background -->
+  <div
+    class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
+    aria-hidden="true"
+  >
+    <p
+      style="
+        font-family: 'Marcellus', serif;
+        font-size: clamp(6rem, 18vw, 16rem);
+        font-weight: 400;
+        color: rgba(255,251,245,0.025);
+        white-space: nowrap;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      "
+    >
+      {config.couple.partner1} &amp; {config.couple.partner2}
+    </p>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
+
+    <!-- Top nav links -->
+    <div class="flex flex-wrap justify-center gap-8 md:gap-14 mb-16 md:mb-20">
+      {[
+        { href: "#our-story", label: "Our Story" },
+        { href: "#the-day",   label: "The Day" },
+        { href: "#rsvp",      label: "RSVP" },
+        { href: "#faq",       label: "FAQ" },
+      ].map(({ href, label }) => (
+        <a
+          href={href}
+          style="
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,251,245,0.4);
+            transition: color 0.3s ease;
+          "
+          onmouseover="this.style.color='rgba(184,150,90,0.9)'"
+          onmouseout="this.style.color='rgba(255,251,245,0.4)'"
+        >
+          {label}
+        </a>
+      ))}
     </div>
 
-    <!-- Divider -->
-    <div class="w-20 h-px mx-auto mb-12" style="background-color: var(--gold); opacity: 0.4;"></div>
+    <!-- Gold rule -->
+    <div
+      style="width: 1px; height: 60px; background: linear-gradient(to bottom, transparent, rgba(184,150,90,0.5), transparent); margin: 0 auto 3rem;"
+    ></div>
 
-    <!-- Couple names -->
-    <div class="text-center">
+    <!-- Main display names -->
+    <div class="text-center mb-10">
       <p
-        class="font-display text-3xl md:text-4xl mb-4"
-        style="color: var(--cream); letter-spacing: 0.03em; font-weight: 400;"
+        style="
+          font-family: 'Marcellus', serif;
+          font-size: clamp(3rem, 8vw, 6.5rem);
+          font-weight: 400;
+          color: var(--cream);
+          letter-spacing: 0.02em;
+          line-height: 1;
+          margin-bottom: 0.3em;
+        "
       >
-        {config.couple.partner1} & {config.couple.partner2}
+        {config.couple.partner1}
+        <span
+          style="
+            font-family: 'Cormorant', serif;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--gold);
+            font-size: 0.7em;
+            margin: 0 0.3em;
+          "
+        >&amp;</span>
+        {config.couple.partner2}
       </p>
-      <p class="text-xs font-medium tracking-wider uppercase" style="color: var(--cream); opacity: 0.6; letter-spacing: 0.15em;">
+
+      <p
+        style="
+          font-family: 'Montserrat', sans-serif;
+          font-size: 10px;
+          letter-spacing: 0.26em;
+          text-transform: uppercase;
+          color: rgba(255,251,245,0.3);
+          font-weight: 500;
+          margin-bottom: 6px;
+        "
+      >
         {config.date.display}
       </p>
-      <p class="text-sm mt-3 font-body" style="color: var(--cream); opacity: 0.5;">
-        {config.venue.city}, {config.venue.country}
+      <p
+        style="
+          font-family: 'Cormorant', serif;
+          font-size: 1rem;
+          color: rgba(255,251,245,0.22);
+          font-weight: 300;
+          letter-spacing: 0.06em;
+        "
+      >
+        {config.venue.name} · {config.venue.city}
       </p>
     </div>
+
+    <!-- Horizontal gold rule -->
+    <div style="width: 40px; height: 1px; background: rgba(184,150,90,0.4); margin: 2.5rem auto;"></div>
+
+    <!-- Bottom caption -->
+    <p
+      class="text-center"
+      style="
+        font-family: 'Caveat', cursive;
+        font-size: 1.35rem;
+        color: rgba(255,251,245,0.2);
+        letter-spacing: 0.02em;
+      "
+    >
+      With love, always.
+    </p>
   </div>
 </footer>
