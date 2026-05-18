@@ -5,6 +5,11 @@
 @import "@fontsource/montserrat/600.css";
 @import "@fontsource/montserrat/700.css";
 @import "@fontsource/marcellus/400.css";
+@import "@fontsource/cormorant/300.css";
+@import "@fontsource/cormorant/400.css";
+@import "@fontsource/cormorant/500.css";
+@import "@fontsource/caveat/400.css";
+@import "@fontsource/caveat/700.css";
 
 @tailwind base;
 @tailwind components;
@@ -24,38 +29,31 @@
 
 /* ─── CSS Custom Properties ──────────────────────────────────── */
 :root {
-  /* Lovio-inspired color scheme - Luxury, elegant, refined */
   --cream: #FFFBF5;
   --cream-light: #FFFEF9;
-  --cream-dark: #F5F0E8;
+  --cream-dark: #F0EBE1;
 
   --white: #FFFFFF;
   --off-white: #FEFEFE;
 
-  --charcoal: #2A2A2A;
-  --charcoal-light: #3A3A3A;
-  --charcoal-soft: #4A4A4A;
+  --charcoal: #1A1A18;
+  --charcoal-light: #2A2A28;
+  --charcoal-soft: #3A3A38;
 
-  --text-primary: #2A2A2A;
-  --text-muted: #666666;
-  --text-light: #999999;
+  --text-primary: #1A1A18;
+  --text-muted: #6B6660;
+  --text-light: #9C9890;
 
-  --gold: #C5A572;
-  --gold-light: #D4B685;
-  --gold-dark: #B69563;
+  --gold: #B8965A;
+  --gold-light: #C9A96E;
+  --gold-dark: #A07E48;
 
-  --divider: #E8E4DE;
-  --divider-light: #F0EDE8;
+  --divider: #E2DDD6;
+  --divider-light: #EDE8E2;
 
-  /* Semantic tokens */
   --primary: var(--charcoal);
-  --primary-light: var(--charcoal-light);
   --accent: var(--gold);
-  --accent-secondary: var(--gold-light);
   --background: var(--cream);
-  --background-alt: var(--white);
-  --text: var(--text-primary);
-  --text-soft: var(--text-muted);
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */
@@ -70,83 +68,117 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: none;
 }
 
-/* ─── Typography Utilities ───────────────────────────────────── */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+/* ─── Film Grain Overlay ─────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: multiply;
+}
+
+/* ─── Typography ─────────────────────────────────────────────── */
 .font-display {
   font-family: 'Marcellus', serif;
 }
 
 .font-serif {
-  font-family: 'Marcellus', serif;
+  font-family: 'Cormorant', serif;
 }
 
 .font-body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.font-handwriting {
+  font-family: 'Caveat', cursive;
+}
+
 .label-text {
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.15em;
+  font-size: 10px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-muted);
   font-weight: 500;
 }
 
-/* ─── Focus Rings ────────────────────────────────────────────── */
+/* ─── Focus / Selection ──────────────────────────────────────── */
 *:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
 }
 
-/* ─── Selection ──────────────────────────────────────────────── */
 ::selection {
-  background: rgba(197, 165, 114, 0.2);
+  background: rgba(184, 150, 90, 0.18);
   color: var(--text-primary);
 }
 
-/* ─── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
+/* ─── Section ghost number ───────────────────────────────────── */
+.section-number {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(6rem, 15vw, 13rem);
+  font-weight: 300;
+  color: var(--charcoal);
+  opacity: 0.04;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--cream);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(197, 165, 114, 0.3);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(197, 165, 114, 0.5);
-}
-
-/* ─── Horizontal Rule ────────────────────────────────────────── */
+/* ─── Divider ────────────────────────────────────────────────── */
 .divider-line {
-  width: 80px;
+  width: 40px;
   height: 1px;
   background-color: var(--gold);
-  opacity: 0.4;
+  opacity: 0.6;
   margin: 0 auto;
 }
 
-/* ─── Button Styles ──────────────────────────────────────────── */
+/* ─── Marquee ────────────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 32s linear infinite;
+  will-change: transform;
+}
+
+.marquee-reverse .marquee-track {
+  animation-direction: reverse;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────── */
 .btn-primary {
-  display: inline-block;
-  padding: 16px 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 52px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--white);
   background-color: var(--charcoal);
-  border: 2px solid var(--charcoal);
-  transition: all 0.4s ease;
-  cursor: pointer;
+  border: 1px solid var(--charcoal);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   overflow: hidden;
 }
@@ -155,11 +187,11 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: var(--white);
+  background-color: var(--gold);
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 0.4s ease;
-  z-index: -1;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 0;
 }
 
 .btn-primary:hover::before {
@@ -167,28 +199,24 @@ body {
   transform-origin: left;
 }
 
-.btn-primary:hover {
-  color: var(--charcoal);
-  border-color: var(--charcoal);
-}
+.btn-primary > * { position: relative; z-index: 1; }
 
-.btn-primary:active {
-  transform: scale(0.97);
-}
+.btn-primary:hover { border-color: var(--gold); }
 
 .btn-outline {
-  display: inline-block;
-  padding: 16px 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 52px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--charcoal);
   background-color: transparent;
-  border: 2px solid var(--charcoal);
-  transition: all 0.4s ease;
-  cursor: pointer;
+  border: 1px solid currentColor;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   overflow: hidden;
 }
@@ -200,8 +228,8 @@ body {
   background-color: var(--charcoal);
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 0.4s ease;
-  z-index: -1;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 0;
 }
 
 .btn-outline:hover::before {
@@ -209,73 +237,106 @@ body {
   transform-origin: left;
 }
 
-.btn-outline:hover {
-  color: var(--white);
-}
+.btn-outline > * { position: relative; z-index: 1; }
+.btn-outline:hover { color: var(--white); }
 
-.btn-outline:active {
-  transform: scale(0.97);
-}
-
-/* ─── Card Styles ────────────────────────────────────────────── */
-.card-hover {
-  transition: all 0.5s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-}
-
-.card-image-hover {
-  overflow: hidden;
-}
-
-.card-image-hover img {
-  transition: transform 0.6s ease;
-}
-
-.card-image-hover:hover img {
-  transform: scale(1.05);
-}
-
-/* ─── Input Styles ───────────────────────────────────────────── */
+/* ─── Form Inputs ────────────────────────────────────────────── */
 .form-input,
 .form-textarea,
 .form-select {
   width: 100%;
-  padding: 14px 18px;
+  padding: 16px 0;
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-primary);
-  background-color: var(--white);
-  border: 1px solid var(--divider);
-  transition: all 0.3s ease;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--divider);
+  transition: border-color 0.3s ease;
+  appearance: none;
 }
 
 .form-input:focus,
 .form-textarea:focus,
 .form-select:focus {
   outline: none;
-  border-color: var(--gold);
-  background-color: var(--white);
-  box-shadow: 0 2px 8px rgba(197, 165, 114, 0.15);
+  border-bottom-color: var(--charcoal);
 }
 
 .form-label {
   display: block;
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 10px;
-  transition: color 0.3s ease;
+  margin-bottom: 8px;
 }
 
-.form-input:focus + .form-label,
-.form-textarea:focus + .form-label,
-.form-select:focus + .form-label {
-  color: var(--gold);
+/* ─── Cards ──────────────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.card-hover:hover { transform: translateY(-8px); }
+
+/* ─── Scrapbook ──────────────────────────────────────────────── */
+.scrapbook-photo {
+  position: relative;
+  background: #FFFFFF;
+  padding: 12px 12px 44px 12px;
+  box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.07);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s ease;
+}
+.scrapbook-photo:hover { box-shadow: 6px 12px 40px rgba(0, 0, 0, 0.12); }
+
+.scrapbook-tilt-1 { transform: rotate(-2deg); }
+.scrapbook-tilt-2 { transform: rotate(1.5deg); }
+.scrapbook-tilt-3 { transform: rotate(-1deg); }
+.scrapbook-tilt-4 { transform: rotate(2.5deg); }
+.scrapbook-tilt-5 { transform: rotate(-1.5deg); }
+.scrapbook-tilt-6 { transform: rotate(3deg); }
+
+.scrapbook-tilt-1:hover, .scrapbook-tilt-2:hover,
+.scrapbook-tilt-3:hover, .scrapbook-tilt-4:hover,
+.scrapbook-tilt-5:hover, .scrapbook-tilt-6:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.washi-tape {
+  position: absolute;
+  width: 80px;
+  height: 22px;
+  background: rgba(184, 150, 90, 0.3);
+  z-index: 10;
+  border-radius: 1px;
+  background-image: repeating-linear-gradient(
+    90deg, transparent, transparent 2px,
+    rgba(255,255,255,0.12) 2px, rgba(255,255,255,0.12) 4px
+  );
+}
+.washi-tape--top-left  { top: -8px; left: 16px; transform: rotate(-12deg); }
+.washi-tape--top-right { top: -6px; right: 16px; transform: rotate(8deg); }
+
+.scrapbook-caption {
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  color: var(--charcoal-soft);
+  transform: rotate(-1deg);
+  opacity: 0.8;
+}
+
+.paper-texture {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(184,150,90,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(184,150,90,0.02) 0%, transparent 50%);
+}
+
+@media (max-width: 767px) {
+  .scrapbook-tilt-1, .scrapbook-tilt-2, .scrapbook-tilt-3,
+  .scrapbook-tilt-4, .scrapbook-tilt-5, .scrapbook-tilt-6 {
+    transform: rotate(0deg);
+  }
+  .scrapbook-photo { padding: 8px 8px 36px 8px; max-width: 320px; margin: 0 auto; }
+  .washi-tape { width: 60px; height: 18px; }
 }

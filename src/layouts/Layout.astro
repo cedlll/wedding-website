@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import config from "../lib/wedding-config";
+import CustomCursor from "../components/islands/CustomCursor";
 
 interface Props {
   title?: string;
@@ -23,6 +24,7 @@ const description = `Join ${config.couple.partner1} and ${config.couple.partner2
     <title>{title}</title>
   </head>
   <body>
+    <CustomCursor client:load />
     <slot />
   </body>
 </html>

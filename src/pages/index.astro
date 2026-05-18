@@ -1,13 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/sections/Hero.astro";
-import HighlightsSection from "../components/sections/HighlightsSection.astro";
-import WeddingDetails from "../components/sections/WeddingDetails.astro";
-import PortfolioGallery from "../components/sections/PortfolioGallery.astro";
-import TestimonialsSection from "../components/sections/TestimonialsSection.astro";
 import OurStory from "../components/sections/OurStory.astro";
 import EventFlowSection from "../components/sections/EventFlowSection.astro";
 import AttireSection from "../components/sections/AttireSection.astro";
+import PortfolioGallery from "../components/sections/PortfolioGallery.astro";
 import ExperienceSection from "../components/sections/ExperienceSection.astro";
 import FaqSection from "../components/sections/FaqSection.astro";
 import RsvpSection from "../components/sections/RsvpSection.astro";
@@ -15,47 +12,38 @@ import GiftSection from "../components/sections/GiftSection.astro";
 import Footer from "../components/sections/Footer.astro";
 
 import StickyNav from "../components/islands/StickyNav";
+import MarqueeBand from "../components/islands/MarqueeBand";
 ---
 
 <Layout>
   <StickyNav client:load />
 
   <main>
-    <!-- Hero Carousel (like Lovio) -->
     <Hero />
 
-    <!-- 3-column Highlights/Service Cards (like Lovio's service section) -->
-    <HighlightsSection />
+    <!-- Marquee after hero -->
+    <MarqueeBand client:load />
 
-    <!-- About Section with Image+Text (like Lovio's "Who We Are") -->
-    <WeddingDetails />
-
-    <!-- Portfolio Grid (like Lovio's gallery) -->
-    <PortfolioGallery />
-
-    <!-- Testimonials Carousel (like Lovio's testimonials) -->
-    <TestimonialsSection />
-
-    <!-- Our Story Timeline -->
     <OurStory />
 
-    <!-- Event Flow Schedule -->
+    <!-- Dark marquee between story and event flow -->
+    <MarqueeBand client:visible dark={true} reverse={true} />
+
     <EventFlowSection />
 
-    <!-- Attire Details -->
     <AttireSection />
 
-    <!-- Experience/Travel Info -->
+    <PortfolioGallery />
+
+    <MarqueeBand client:visible size="sm" />
+
     <ExperienceSection />
 
-    <!-- FAQ Accordion -->
-    <FaqSection />
-
-    <!-- RSVP Form -->
     <RsvpSection />
 
-    <!-- Gift Registry -->
     <GiftSection />
+
+    <FaqSection />
   </main>
 
   <Footer />
