@@ -2,13 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/sections/Hero.astro";
 import HighlightsSection from "../components/sections/HighlightsSection.astro";
-import WeddingDetails from "../components/sections/WeddingDetails.astro";
 import PortfolioGallery from "../components/sections/PortfolioGallery.astro";
-import TestimonialsSection from "../components/sections/TestimonialsSection.astro";
-import OurStory from "../components/sections/OurStory.astro";
 import EventFlowSection from "../components/sections/EventFlowSection.astro";
 import AttireSection from "../components/sections/AttireSection.astro";
-import ExperienceSection from "../components/sections/ExperienceSection.astro";
+import AccommodationsSection from "../components/sections/AccommodationsSection.astro";
 import FaqSection from "../components/sections/FaqSection.astro";
 import RsvpSection from "../components/sections/RsvpSection.astro";
 import GiftSection from "../components/sections/GiftSection.astro";
@@ -24,38 +21,29 @@ import StickyNav from "../components/islands/StickyNav";
     <!-- Hero Carousel (like Lovio) -->
     <Hero />
 
-    <!-- 3-column Highlights/Service Cards (like Lovio's service section) -->
+    <!-- Venue Section -->
     <HighlightsSection />
-
-    <!-- About Section with Image+Text (like Lovio's "Who We Are") -->
-    <WeddingDetails />
-
-    <!-- Portfolio Grid (like Lovio's gallery) -->
-    <PortfolioGallery />
-
-    <!-- Testimonials Carousel (like Lovio's testimonials) -->
-    <TestimonialsSection />
-
-    <!-- Our Story Timeline -->
-    <OurStory />
-
-    <!-- Event Flow Schedule -->
-    <EventFlowSection />
 
     <!-- Attire Details -->
     <AttireSection />
 
-    <!-- Experience/Travel Info -->
-    <ExperienceSection />
+    <!-- Photo Gallery -->
+    <PortfolioGallery />
 
-    <!-- FAQ Accordion -->
-    <FaqSection />
+    <!-- Event Flow Schedule -->
+    <EventFlowSection />
+
+    <!-- Nearby Accommodations -->
+    <AccommodationsSection />
 
     <!-- RSVP Form -->
     <RsvpSection />
 
     <!-- Gift Registry -->
     <GiftSection />
+
+    <!-- FAQ Accordion -->
+    <FaqSection />
   </main>
 
   <Footer />

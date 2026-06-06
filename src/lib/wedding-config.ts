@@ -24,22 +24,23 @@ export interface WeddingConfig {
     description: string;
   }>;
   attire: {
-    theme: string;
-    description: string;
-    colorPalette: Array<{
-      name: string;
-      hex: string;
+    groups: Array<{
+      label: string;
+      theme: string;
+      description: string;
+      men: {
+        title: string;
+        description: string;
+        image: string;
+        colorPalette: Array<{ name: string; hex: string }>;
+      };
+      women: {
+        title: string;
+        description: string;
+        image: string;
+        colorPalette: Array<{ name: string; hex: string }>;
+      };
     }>;
-    men: {
-      title: string;
-      description: string;
-      image: string;
-    };
-    women: {
-      title: string;
-      description: string;
-      image: string;
-    };
   };
   gifts: Array<{
     label: string;
@@ -73,6 +74,13 @@ export interface WeddingConfig {
     description: string;
     image: string;
   }>;
+  accommodations: Array<{
+    name: string;
+    description: string;
+    distance: string;
+    website?: string;
+    image: string;
+  }>;
   gallery: {
     photos: Array<{
       src: string;
@@ -101,10 +109,10 @@ const config: WeddingConfig = {
 
   venue: {
     name: "Hacienda Solange",
-    city: "Tagaytay City",
+    city: "Alfonso, Cavite",
     country: "Philippines",
-    fullAddress: "// TODO: full address",
-    googleMapsUrl: "// TODO: Google Maps link",
+    fullAddress: "Hacienda Solange, Alfonso, Cavite, Philippines",
+    googleMapsUrl: "https://maps.google.com/?q=Hacienda+Solange+Alfonso+Cavite",
   },
 
   tagline:
@@ -138,28 +146,64 @@ const config: WeddingConfig = {
   ],
 
   attire: {
-    theme: "Filipiniana Formal",
-    description:
-      "We invite our guests to honor Filipino heritage through elegant Filipiniana-inspired attire. Gentlemen in Barong Tagalog and ladies in modern Filipiniana or terno silhouettes, in our wedding color palette.",
-    colorPalette: [
-      { name: "Blush", hex: "#D4B5A7" },
-      { name: "Terracotta", hex: "#A56B5B" },
-      { name: "Forest", hex: "#3A4A3B" },
-      { name: "Moss", hex: "#A8B88F" },
-      { name: "Linen", hex: "#E8E0D5" },
+    groups: [
+      {
+        label: "Principal and Secondary Sponsors",
+        theme: "Formal",
+        description: "",
+        men: {
+          title: "Gentlemen",
+          description:
+            "Traditional Barong Tagalog drawn from a warm, understated palette — cream and almond.",
+          image: "/images/attire/gentlemen.jpg",
+          colorPalette: [
+            { name: "Cream", hex: "#F5ECD7" },
+            { name: "Almond", hex: "#E8DAC3" },
+          ],
+        },
+        women: {
+          title: "Ladies",
+          description:
+            "From the soft stillness of sage and dusty sage to the deep, grounded richness of moss and forest green.",
+          image: "/images/attire/ladies-sponsor.jpg",
+          colorPalette: [
+            { name: "Sage", hex: "#B3C5A8" },
+            { name: "Dusty Sage", hex: "#8FAE82" },
+            { name: "Moss", hex: "#6B7F5E" },
+            { name: "Forest Green", hex: "#3B4F3A" },
+          ],
+        },
+      },
+      {
+        label: "All Guests",
+        theme: "Formal",
+        description: "",
+        men: {
+          title: "Gentlemen",
+          description:
+            "Formal attire in a palette as warm and unhurried as the earth itself — cream, almond, tan, and brown.",
+          image: "/images/attire/gentlemen-guest.jpg",
+          colorPalette: [
+            { name: "Cream", hex: "#F5ECD7" },
+            { name: "Almond", hex: "#E8DAC3" },
+            { name: "Tan", hex: "#C9A96E" },
+            { name: "Brown", hex: "#8B6F47" },
+          ],
+        },
+        women: {
+          title: "Ladies",
+          description:
+            "From the delicate softness of cream and almond to the grounded richness of tan and brown.",
+          image: "/images/attire/ladies-guest.jpg",
+          colorPalette: [
+            { name: "Cream", hex: "#F5ECD7" },
+            { name: "Almond", hex: "#E8DAC3" },
+            { name: "Tan", hex: "#C9A96E" },
+            { name: "Brown", hex: "#8B6F47" },
+          ],
+        },
+      },
     ],
-    men: {
-      title: "For the Gentlemen",
-      description:
-        "A classic Barong Tagalog \u2014 either embroidered jusi or pi\u00f1a fabric \u2014 paired with dark slacks and leather shoes. Keep accessories minimal and elegant.",
-      image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=800&fit=crop&crop=top",
-    },
-    women: {
-      title: "For the Ladies",
-      description:
-        "A modern Filipiniana dress or terno with butterfly sleeves in soft, muted tones from our palette. Floor-length or tea-length silhouettes are both welcome.",
-      image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=800&fit=crop&crop=center",
-    },
   },
 
   gifts: [
@@ -249,9 +293,9 @@ const config: WeddingConfig = {
 
   experience: [
     {
-      title: "Explore Tagaytay",
+      title: "Explore Alfonso",
       description:
-        "Discover the cool mountain breeze, stunning views of Taal Lake, and charming cafes and restaurants that make Tagaytay a beloved destination.",
+        "Discover the cool mountain breeze, stunning views, and charming cafes and restaurants that make Alfonso, Cavite a beloved destination.",
       image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=800&fit=crop",
     },
     {
@@ -263,16 +307,44 @@ const config: WeddingConfig = {
     {
       title: "Spa & Wellness",
       description:
-        "Treat yourself to a rejuvenating experience at one of Tagaytay's renowned wellness retreats and hot spring resorts.",
+        "Treat yourself to a rejuvenating experience at one of the area's renowned wellness retreats and hot spring resorts.",
       image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=800&fit=crop",
     },
   ],
 
+  accommodations: [
+    {
+      name: "The Lake Hotel",
+      description:
+        "Luxury lakeside hotel with stunning Taal views, spa facilities, and fine dining. Perfect for a relaxing stay.",
+      distance: "5 minutes from venue",
+      website: "https://example.com",
+      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop",
+    },
+    {
+      name: "Wingate Manor",
+      description:
+        "Charming boutique hotel with cozy rooms, beautiful gardens, and a warm atmosphere.",
+      distance: "10 minutes from venue",
+      website: "https://example.com",
+      image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&h=400&fit=crop",
+    },
+    {
+      name: "Twin Lakes Hotel",
+      description:
+        "Modern resort with golf course access, multiple dining options, and spacious accommodations.",
+      distance: "15 minutes from venue",
+      website: "https://example.com",
+      image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop",
+    },
+  ],
+
   gallery: {
-    photos: Array.from({ length: 12 }, (_, i) => ({
-      src: `/images/prenup/${String(i + 1).padStart(2, "0")}.jpg`,
-      alt: `Cedric & Karen - Photo ${i + 1}`,
-    })),
+    photos: Array.from({ length: 104 }, (_, i) => {
+      const n = i + 1;
+      const filename = n < 100 ? String(n).padStart(2, "0") : String(n);
+      return { src: `/images/prenup/${filename}.jpg`, alt: `Cedric & Karen - Photo ${n}` };
+    }),
   },
 
   images: {

@@ -12,6 +12,8 @@
   "dependencies": {
     "@astrojs/react": "^3.6.0",
     "@astrojs/tailwind": "^5.1.0",
+    "@fontsource/alex-brush": "^5.2.8",
+    "@fontsource/caveat": "^5.2.8",
     "@fontsource/cormorant": "^5.2.8",
     "@fontsource/dm-sans": "^5.2.8",
     "@fontsource/marcellus": "^5.2.8",

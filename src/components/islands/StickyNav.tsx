@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const sections = [
-  { id: "our-story", label: "Our Story" },
   { id: "the-day", label: "The Day" },
   { id: "faq", label: "FAQ" },
   { id: "rsvp", label: "RSVP" },
@@ -34,24 +33,29 @@ export default function StickyNav() {
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          backgroundColor: scrolled ? "rgba(255, 255, 255, 0.95)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(232, 228, 222, 0.6)" : "1px solid transparent",
+          backgroundColor: scrolled ? "rgba(255, 251, 245, 0.7)" : "transparent",
+          backdropFilter: scrolled ? "blur(20px) saturate(180%)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(20px) saturate(180%)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(232, 228, 222, 0.3)" : "1px solid transparent",
         }}
         aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
           <motion.a
             href="#"
-            className={`font-display text-xl transition-colors duration-300 ${
-              scrolled || menuOpen ? "text-charcoal" : "text-white"
-            }`}
-            style={{ zIndex: 60, position: "relative", letterSpacing: "0.05em" }}
+            style={{ zIndex: 60, position: "relative" }}
             aria-label="Back to top"
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.2 }}
           >
-            C & K
+            <img
+              src="/images/ck-logo.png"
+              alt="C & K"
+              className="h-10 w-auto transition-all duration-300"
+              style={{
+                filter: scrolled || menuOpen ? "invert(1)" : "none",
+              }}
+            />
           </motion.a>
 
           <div className="hidden md:flex items-center gap-12">

@@ -5,6 +5,12 @@
 @import "@fontsource/montserrat/600.css";
 @import "@fontsource/montserrat/700.css";
 @import "@fontsource/marcellus/400.css";
+@import "@fontsource/caveat/400.css";
+@import "@fontsource/caveat/700.css";
+@import "@fontsource/alex-brush/400.css";
+@import "@fontsource/cormorant/300.css";
+@import "@fontsource/cormorant/400.css";
+@import "@fontsource/cormorant/600.css";
 
 @tailwind base;
 @tailwind components;
@@ -85,6 +91,14 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.font-signature {
+  font-family: 'Alex Brush', cursive;
+}
+
+.font-hero {
+  font-family: 'Cormorant', serif;
+}
+
 .label-text {
   font-family: 'Montserrat', sans-serif;
   font-size: 11px;
@@ -104,24 +118,6 @@ body {
 ::selection {
   background: rgba(197, 165, 114, 0.2);
   color: var(--text-primary);
-}
-
-/* ─── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--cream);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(197, 165, 114, 0.3);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(197, 165, 114, 0.5);
 }
 
 /* ─── Horizontal Rule ────────────────────────────────────────── */
@@ -278,4 +274,137 @@ body {
 .form-textarea:focus + .form-label,
 .form-select:focus + .form-label {
   color: var(--gold);
+}
+
+/* ─── Scrapbook Effects (Story & Gallery only) ────────────────── */
+
+.font-handwriting {
+  font-family: 'Caveat', cursive;
+}
+
+/* Polaroid-style photo frame */
+.scrapbook-photo {
+  position: relative;
+  background: #FFFFFF;
+  padding: 12px 12px 44px 12px;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.scrapbook-photo:hover {
+  box-shadow: 4px 8px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Photo rotation variants */
+.scrapbook-tilt-1 { transform: rotate(-2deg); }
+.scrapbook-tilt-2 { transform: rotate(1.5deg); }
+.scrapbook-tilt-3 { transform: rotate(-1deg); }
+.scrapbook-tilt-4 { transform: rotate(2.5deg); }
+.scrapbook-tilt-5 { transform: rotate(-1.5deg); }
+.scrapbook-tilt-6 { transform: rotate(3deg); }
+
+/* Hover straightens the photo */
+.scrapbook-tilt-1:hover,
+.scrapbook-tilt-2:hover,
+.scrapbook-tilt-3:hover,
+.scrapbook-tilt-4:hover,
+.scrapbook-tilt-5:hover,
+.scrapbook-tilt-6:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+/* Washi tape / masking tape effect */
+.washi-tape {
+  position: absolute;
+  width: 80px;
+  height: 24px;
+  background: rgba(197, 165, 114, 0.35);
+  z-index: 10;
+  border-radius: 1px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.15) 2px,
+    rgba(255, 255, 255, 0.15) 4px
+  );
+}
+
+.washi-tape--top-left {
+  top: -8px;
+  left: 16px;
+  transform: rotate(-12deg);
+}
+
+.washi-tape--top-right {
+  top: -6px;
+  right: 16px;
+  transform: rotate(8deg);
+}
+
+.washi-tape--bottom-right {
+  bottom: 28px;
+  right: 12px;
+  transform: rotate(-4deg);
+}
+
+.washi-tape--cream {
+  background: rgba(232, 224, 213, 0.7);
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 3px,
+    rgba(255, 255, 255, 0.2) 3px,
+    rgba(255, 255, 255, 0.2) 5px
+  );
+}
+
+/* Handwritten caption */
+.scrapbook-caption {
+  font-family: 'Caveat', cursive;
+  font-size: 1.25rem;
+  color: var(--charcoal-soft);
+  transform: rotate(-1deg);
+  opacity: 0.85;
+}
+
+/* Paper texture background */
+.paper-texture {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(197, 165, 114, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(197, 165, 114, 0.02) 0%, transparent 50%);
+}
+
+
+/* ─── Scrapbook Responsive ────────────────────────────────────── */
+@media (max-width: 767px) {
+  .scrapbook-tilt-1,
+  .scrapbook-tilt-2,
+  .scrapbook-tilt-3,
+  .scrapbook-tilt-4,
+  .scrapbook-tilt-5,
+  .scrapbook-tilt-6 {
+    transform: rotate(0deg);
+  }
+
+  .scrapbook-tilt-1:hover,
+  .scrapbook-tilt-2:hover,
+  .scrapbook-tilt-3:hover,
+  .scrapbook-tilt-4:hover,
+  .scrapbook-tilt-5:hover,
+  .scrapbook-tilt-6:hover {
+    transform: rotate(0deg) scale(1.01);
+  }
+
+  .scrapbook-photo {
+    padding: 8px 8px 36px 8px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .washi-tape {
+    width: 60px;
+    height: 18px;
+  }
 }

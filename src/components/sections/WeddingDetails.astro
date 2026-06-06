@@ -4,62 +4,91 @@ import config from "../../lib/wedding-config";
 
 <section id="details" class="py-24 md:py-32 px-6" style="background-color: var(--cream);">
   <div class="max-w-6xl mx-auto">
-    <!-- Two column layout: Text + Image -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-      <!-- Left: Text Content -->
-      <div>
-        <p class="label-text mb-6" style="color: var(--gold);">About Our Day</p>
-        <h2
-          class="font-display text-4xl md:text-5xl mb-8"
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <p class="label-text mb-4" style="color: var(--gold);">Attire & Palette</p>
+      <h2
+        class="font-display text-4xl md:text-5xl mb-6"
+        style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
+      >
+        Dress Code & Color Scheme
+      </h2>
+      <p
+        class="font-body text-lg leading-relaxed max-w-3xl mx-auto"
+        style="color: var(--text-muted); line-height: 1.8;"
+      >
+        {config.attire.groups[0].description}
+      </p>
+    </div>
+
+    <!-- Attire Groups -->
+    {config.attire.groups.map((group, i) => (
+      <div class={`mb-16 ${i > 0 ? 'pt-12 border-t' : ''}`} style={i > 0 ? 'border-color: var(--divider);' : ''}>
+        <p class="label-text text-center mb-4" style="color: var(--gold);">{group.label}</p>
+        <h3
+          class="font-display text-3xl text-center mb-4"
           style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
         >
-          Join Us in Celebration
-        </h2>
-
+          {group.theme}
+        </h3>
         <p
-          class="font-body text-lg leading-relaxed mb-8"
-          style="color: var(--text-muted); line-height: 1.8;"
+          class="font-body text-base text-center leading-relaxed max-w-2xl mx-auto mb-8"
+          style="color: var(--text-muted); line-height: 1.7;"
         >
-          {config.tagline}
+          {group.description}
         </p>
 
-        <!-- Event Details -->
-        <div class="space-y-6">
+        <!-- Color Palette -->
+        <div class="flex flex-wrap justify-center gap-6 max-w-2xl mx-auto mb-10">
+          {group.colorPalette.map((color) => (
+            <div class="flex flex-col items-center gap-3">
+              <div
+                class="w-20 h-20 rounded-full border-2 transition-transform duration-300 hover:scale-110"
+                style={`background-color: ${color.hex}; border-color: var(--divider);`}
+              />
+              <p
+                class="font-body text-sm tracking-wide"
+                style="color: var(--text-muted);"
+              >
+                {color.name}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Attire Guidance -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           <div>
-            <p class="label-text mb-2" style="color: var(--gold);">Date</p>
-            <p class="font-display text-xl" style="color: var(--charcoal); letter-spacing: 0.02em;">
-              {config.date.dayOfWeek}, {config.date.display}
+            <h4
+              class="font-display text-xl mb-2"
+              style="color: var(--charcoal); letter-spacing: 0.02em;"
+            >
+              {group.men.title}
+            </h4>
+            <p
+              class="font-body text-sm leading-relaxed"
+              style="color: var(--text-muted); line-height: 1.7;"
+            >
+              {group.men.description}
             </p>
           </div>
-
           <div>
-            <p class="label-text mb-2" style="color: var(--gold);">Location</p>
-            <p class="font-display text-xl" style="color: var(--charcoal); letter-spacing: 0.02em;">
-              {config.venue.name}
-            </p>
-            <p class="font-body text-sm mt-1" style="color: var(--text-muted);">
-              {config.venue.city}, {config.venue.country}
-            </p>
-          </div>
-
-          <div>
-            <p class="label-text mb-2" style="color: var(--gold);">Dress Code</p>
-            <p class="font-display text-xl" style="color: var(--charcoal); letter-spacing: 0.02em;">
-              {config.attire.theme}
+            <h4
+              class="font-display text-xl mb-2"
+              style="color: var(--charcoal); letter-spacing: 0.02em;"
+            >
+              {group.women.title}
+            </h4>
+            <p
+              class="font-body text-sm leading-relaxed"
+              style="color: var(--text-muted); line-height: 1.7;"
+            >
+              {group.women.description}
             </p>
           </div>
         </div>
       </div>
+    ))}
 
-      <!-- Right: Image -->
-      <div class="aspect-[4/5] overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=1000&fit=crop"
-          alt="Wedding venue"
-          class="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-    </div>
   </div>
 </section>

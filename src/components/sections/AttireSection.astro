@@ -3,11 +3,11 @@ import AttireSectionIsland from "../islands/AttireSection";
 import config from "../../lib/wedding-config";
 ---
 
-<section id="attire" class="py-24 md:py-32 px-6" style="background-color: var(--cream-light);">
-  <div class="max-w-5xl mx-auto">
+<section id="attire" class="py-16 md:py-24" style="background-color: var(--cream-light);">
+  <div>
     <!-- Section header -->
-    <div class="text-center mb-16 md:mb-20">
-      <p class="label-text mb-4">Dress Code</p>
+    <div class="text-center mb-10 md:mb-14 px-6">
+      <p class="label-text mb-3">Dress Code</p>
       <h2
         class="font-display text-section"
         style="color: var(--charcoal);"
@@ -17,6 +17,8 @@ import config from "../../lib/wedding-config";
       <div class="divider-line mt-6"></div>
     </div>
 
-    <AttireSectionIsland client:visible />
+    <div class="px-0 md:px-0">
+      <AttireSectionIsland client:visible />
+    </div>
   </div>
 </section>

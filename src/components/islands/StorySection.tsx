@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import config from "../../lib/wedding-config";
 
+const tiltClasses = ["scrapbook-tilt-1", "scrapbook-tilt-3", "scrapbook-tilt-5"];
+const tapePositions = ["washi-tape--top-left", "washi-tape--top-right", "washi-tape--top-left"];
+
 export default function StorySection() {
   return (
     <div className="space-y-24 md:space-y-32">
@@ -21,7 +24,7 @@ export default function StorySection() {
               ease: [0.25, 0.46, 0.45, 0.94],
             }}
           >
-            {/* Image */}
+            {/* Image — Scrapbook style */}
             <motion.div
               className="w-full md:w-1/2"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -33,15 +36,25 @@ export default function StorySection() {
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
             >
-              <div className="aspect-[4/5] overflow-hidden">
-                <motion.img
-                  src={chapter.image}
-                  alt={`${chapter.title} - ${chapter.year}`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                />
+              <div className={`relative scrapbook-photo ${tiltClasses[i]} mx-auto max-w-md`}>
+                {/* Washi tape accent */}
+                <div className={`washi-tape ${tapePositions[i]}`} />
+
+                <div className="aspect-[4/5] overflow-hidden">
+                  <motion.img
+                    src={chapter.image}
+                    alt={`${chapter.title} - ${chapter.year}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    whileHover={{ scale: 1.03 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  />
+                </div>
+
+                {/* Handwritten caption inside polaroid frame */}
+                <p className="scrapbook-caption text-center mt-2 pb-1">
+                  {chapter.year} — {chapter.title}
+                </p>
               </div>
             </motion.div>
 
@@ -73,7 +86,6 @@ export default function StorySection() {
                   color: "var(--text-muted)",
                   lineHeight: 1.8,
                   marginLeft: isReversed ? "auto" : undefined,
-                  marginRight: isReversed ? undefined : undefined,
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

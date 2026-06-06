@@ -38,6 +38,7 @@ export default {
         display: ['"Marcellus"', 'serif'],
         body: ['"Montserrat"', 'sans-serif'],
         serif: ['"Marcellus"', 'serif'],
+        handwriting: ['"Caveat"', 'cursive'],
       },
       fontSize: {
         'hero': 'clamp(3.5rem, 10vw, 8rem)',
