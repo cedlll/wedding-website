@@ -1,2 +1,12 @@
 # Claude Code local worktrees (nested git repos)
 .claude/
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# OS files
+.DS_Store
