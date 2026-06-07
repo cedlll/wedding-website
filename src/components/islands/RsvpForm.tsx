@@ -9,11 +9,22 @@ export default function RsvpForm() {
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
+
+  const isConfigured = config.rsvp.googleFormUrl.startsWith("https://");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || attending === null) return;
 
+    if (!isConfigured) {
+      // googleFormUrl is still the placeholder value — surface this instead
+      // of silently showing a false "Thank You" to the guest.
+      setError(true);
+      return;
+    }
+
+    setError(false);
     setSubmitting(true);
 
     const fields = config.rsvp.googleFormFields;
@@ -234,6 +245,19 @@ export default function RsvpForm() {
                 placeholder="A few words for the couple..."
               />
             </motion.div>
+
+            {/* Configuration error */}
+            {error && (
+              <motion.p
+                role="alert"
+                className="text-sm text-center"
+                style={{ color: "#b3543e" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                RSVPs aren't connected yet — please contact the couple directly so your response isn't lost.
+              </motion.p>
+            )}
 
             {/* Submit */}
             <motion.button

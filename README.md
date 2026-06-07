@@ -47,17 +47,15 @@ This single file controls nearly all content on the site. Search for `// TODO` m
 - **Love story** — `story[]` (dates, titles, descriptions, image paths)
 - **Gallery** — `gallery.photos[]` (src paths, alt text)
 
-### 2. Add Pre-nup Photos
+### 2. Add Gallery Photos
 
 Place your photos in `public/images/prenup/`:
 
-- Name them `01.jpg`, `02.jpg`, ..., `12.jpg`
+- Name them `01.jpg`, `02.jpg`, ... matching the count generated in `config.gallery.photos` (currently 104 — adjust the `Array.from({ length: ... })` call in `wedding-config.ts` to match how many photos you have)
 - Recommended size: **1200×900px minimum** (landscape)
 - Format: JPEG or WebP
-- Photo `01.jpg` is used as the hero background — pick your best shot
-- Photos `01.jpg`–`06.jpg` are also used in the love story timeline
 
-To add more than 12 photos, add entries to `config.gallery.photos` in `wedding-config.ts`.
+The hero carousel uses `public/images/hero/hero-01.jpg`–`hero-10.jpg` (`config.images` / `HeroAnimation.tsx`), and the love-story timeline uses the URLs in `config.story[].image` — replace the placeholder Unsplash URLs there with your own photos (local paths like `/images/prenup/01.jpg` work too).
 
 ### 3. Replace QR Code Images
 
