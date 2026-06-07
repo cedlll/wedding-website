@@ -51,6 +51,8 @@ export default function StickyNav() {
             <img
               src="/images/ck-logo.png"
               alt="C & K"
+              width="1204"
+              height="950"
               className="h-10 w-auto transition-all duration-300"
               style={{
                 filter: scrolled || menuOpen ? "invert(1)" : "none",

@@ -8,6 +8,26 @@ interface Props {
 
 const { title = `${config.couple.partner1} & ${config.couple.partner2} — ${config.date.display}` } = Astro.props;
 const description = `Join ${config.couple.partner1} and ${config.couple.partner2} as they celebrate their wedding on ${config.date.display} at ${config.venue.name}, ${config.venue.city}.`;
+
+const siteOrigin = Astro.site ?? Astro.url;
+const canonicalURL = new URL(Astro.url.pathname, siteOrigin);
+const ogImageURL = new URL("/images/hero/hero-01.jpg", siteOrigin);
+
+const eventJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: `${config.couple.partner1} & ${config.couple.partner2}'s Wedding`,
+  startDate: config.date.iso,
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  location: {
+    "@type": "Place",
+    name: config.venue.name,
+    address: config.venue.fullAddress,
+  },
+  image: [ogImageURL.toString()],
+  description,
+};
 ---
 
 <!doctype html>
@@ -16,12 +36,26 @@ const description = `Join ${config.couple.partner1} and ${config.couple.partner2
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{title}</title>
+
+    <script type="application/ld+json" set:html={JSON.stringify(eventJsonLd)} />
   </head>
   <body>
     <slot />

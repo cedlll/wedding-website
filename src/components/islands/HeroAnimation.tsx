@@ -78,6 +78,8 @@ export default function HeroAnimation() {
           <img
             src="/images/ck-logo.png"
             alt={`${config.couple.partner1} & ${config.couple.partner2}`}
+            width="1204"
+            height="950"
             className="w-[280px] md:w-[400px] lg:w-[480px] h-auto"
           />
         </motion.div>
