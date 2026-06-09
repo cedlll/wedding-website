@@ -54,7 +54,7 @@ export default function RsvpForm() {
               className="font-display text-4xl md:text-5xl mb-4"
               style={{ color: "var(--charcoal)", letterSpacing: "0.02em", fontWeight: 400 }}
             >
-              Thank You
+              Thank you
             </p>
             <p className="text-base font-body" style={{ color: "var(--text-muted)", lineHeight: 1.7 }}>
               We can't wait to celebrate with you.
@@ -74,7 +74,7 @@ export default function RsvpForm() {
               transition={{ delay: 0.1, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <label className="label-text block mb-3" htmlFor="rsvp-name">
-                Full Name
+                What should we call you?
               </label>
               <motion.input
                 id="rsvp-name"
@@ -118,7 +118,7 @@ export default function RsvpForm() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Joyfully Accept
+                  We'll be there
                 </motion.button>
                 <motion.button
                   type="button"
@@ -135,7 +135,7 @@ export default function RsvpForm() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Regretfully Decline
+                  We'll be there in spirit
                 </motion.button>
               </div>
             </motion.div>
@@ -150,13 +150,13 @@ export default function RsvpForm() {
                   transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                   className="overflow-hidden space-y-8"
                 >
-                  <div>
-                    <label
+                  <div role="group" aria-labelledby="guests-label">
+                    <span
+                      id="guests-label"
                       className="label-text block mb-3"
-                      htmlFor="rsvp-guests"
                     >
-                      Number of Guests
-                    </label>
+                      Party of…
+                    </span>
                     <div className="flex items-center gap-6">
                       <motion.button
                         type="button"
@@ -177,7 +177,8 @@ export default function RsvpForm() {
                       <motion.span
                         className="font-display text-3xl w-8 text-center"
                         style={{ color: "var(--charcoal)", letterSpacing: "0.02em", fontWeight: 400 }}
-                        id="rsvp-guests"
+                        aria-live="polite"
+                        aria-atomic="true"
                         key={guestCount}
                         initial={{ scale: 1.2, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}

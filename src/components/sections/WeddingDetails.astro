@@ -6,12 +6,12 @@ import config from "../../lib/wedding-config";
   <div class="max-w-6xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-16">
-      <p class="label-text mb-4" style="color: var(--gold);">Attire & Palette</p>
+      <p class="label-text mb-4" style="color: var(--gold-text);">Attire & palette</p>
       <h2
         class="font-display text-4xl md:text-5xl mb-6"
         style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
       >
-        Dress Code & Color Scheme
+        The look we're going for
       </h2>
       <p
         class="font-body text-lg leading-relaxed max-w-3xl mx-auto"
@@ -24,7 +24,7 @@ import config from "../../lib/wedding-config";
     <!-- Attire Groups -->
     {config.attire.groups.map((group, i) => (
       <div class={`mb-16 ${i > 0 ? 'pt-12 border-t' : ''}`} style={i > 0 ? 'border-color: var(--divider);' : ''}>
-        <p class="label-text text-center mb-4" style="color: var(--gold);">{group.label}</p>
+        <p class="label-text text-center mb-4" style="color: var(--gold-text);">{group.label}</p>
         <h3
           class="font-display text-3xl text-center mb-4"
           style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"

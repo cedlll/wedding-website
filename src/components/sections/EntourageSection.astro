@@ -1,0 +1,177 @@
+---
+// Placeholder names — replace with the real entourage once finalized.
+const officiant = "Rev. Conrado P. Villanueva";
+
+const principalSponsors = [
+  "Mr. Ramon S. Aquino & Mrs. Lourdes T. Aquino",
+  "Atty. Eduardo M. Bautista & Dr. Carmela R. Bautista",
+];
+
+const secondarySponsors = [
+  "Mr. & Mrs. Vicente G. Mercado",
+  "Engr. & Mrs. Rafael D. Lim",
+];
+
+const brideSide = {
+  parentsLabel: "The Parents of the Bride",
+  parents: "Mr. & Mrs. Antonio C. Reyes",
+  honor: { label: "Maid of Honor", name: "Patricia Anne Reyes" },
+  matron: { label: "Matron of Honor", name: "Karen Joy Villamor" },
+  partyLabel: "Bridesmaids",
+  party: ["Bianca Mae Santos", "Camille Rose Navarro", "Stephanie Joy Ramos"],
+  childLabel: "Flower Girl",
+  child: "Sofia Grace Reyes",
+};
+
+const groomSide = {
+  parentsLabel: "The Parents of the Groom",
+  parents: "Mr. & Mrs. Benjamin L. Dela Cruz",
+  honor: { label: "Best Man", name: "Miguel Angelo Fernandez" },
+  partyLabel: "Groomsmen",
+  party: ["Joshua Daniel Cruz", "Marco Luis Tolentino", "Gabriel Jose Ocampo"],
+  childLabel: "Ring Bearer",
+  child: "Nathan Rafael Dela Cruz",
+};
+---
+
+<section id="entourage" class="py-24 md:py-32 px-6 md:px-12 lg:px-16" style="background-color: var(--cream);">
+  <div class="max-w-4xl mx-auto">
+
+    <!-- Section header -->
+    <div class="text-center mb-16 md:mb-20">
+      <p class="label-text mb-4" style="color: var(--gold-text);">With heartfelt gratitude</p>
+      <h2
+        class="font-display text-5xl md:text-6xl"
+        style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
+      >
+        Entourage
+      </h2>
+      <div class="divider-line mt-8"></div>
+    </div>
+
+    <!-- Officiant & Sponsors — centered, top -->
+    <div class="text-center mb-14 md:mb-16 space-y-8">
+
+      <div>
+        <p class="label-text mb-2" style="color: var(--gold-text);">Officiant</p>
+        <p class="font-display text-lg md:text-xl" style="color: var(--charcoal); font-weight: 400;">
+          {officiant}
+        </p>
+      </div>
+
+      <div>
+        <p class="label-text mb-2" style="color: var(--gold-text);">Principal Sponsors</p>
+        {principalSponsors.map((pair) => (
+          <p class="font-display text-lg md:text-xl" style="color: var(--charcoal); font-weight: 400; line-height: 1.7;">
+            {pair}
+          </p>
+        ))}
+      </div>
+
+      <div>
+        <p class="label-text mb-2" style="color: var(--gold-text);">Secondary Sponsors</p>
+        {secondarySponsors.map((pair) => (
+          <p class="font-display text-lg md:text-xl" style="color: var(--charcoal); font-weight: 400; line-height: 1.7;">
+            {pair}
+          </p>
+        ))}
+      </div>
+
+    </div>
+
+    <!-- Thin gold rule separating top from columns -->
+    <div class="divider-line mb-14 md:mb-16"></div>
+
+    <!-- Two-column split -->
+    <div class="relative grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-0">
+
+      <!-- Vertical divider (desktop only) -->
+      <div
+        class="hidden md:block absolute inset-y-0 left-1/2 -translate-x-1/2"
+        style="width: 1px; background: linear-gradient(to bottom, transparent 0%, var(--gold) 8%, var(--gold) 92%, transparent 100%); opacity: 0.35;"
+      ></div>
+
+      <!-- Bride's side -->
+      <div class="text-center md:pr-14 space-y-8">
+
+        <div>
+          <p class="label-text mb-2" style="color: var(--gold-text);">{brideSide.parentsLabel}</p>
+          <p class="font-display text-base md:text-lg" style="color: var(--charcoal); font-weight: 400;">
+            {brideSide.parents}
+          </p>
+        </div>
+
+        <div>
+          <p class="label-text mb-2" style="color: var(--gold-text);">{brideSide.honor.label}</p>
+          <p class="font-display text-base md:text-lg" style="color: var(--charcoal); font-weight: 400;">
+            {brideSide.honor.name}
+          </p>
+        </div>
+
+        <div>
+          <p class="label-text mb-2" style="color: var(--gold-text);">{brideSide.matron.label}</p>
+          <p class="font-display text-base md:text-lg" style="color: var(--charcoal); font-weight: 400;">
+            {brideSide.matron.name}
+          </p>
+        </div>
+
+        <div>
+          <p class="label-text mb-2" style="color: var(--gold-text);">{brideSide.partyLabel}</p>
+          {brideSide.party.map((name) => (
+            <p class="font-display text-base md:text-lg" style="color: var(--charcoal); font-weight: 400; line-height: 1.7;">
+              {name}
+            </p>
+          ))}
+        </div>
+
+        <div>
+          <p class="label-text mb-2" style="color: var(--gold-text);">{brideSide.childLabel}</p>
+          <p class="font-display text-base md:text-lg" style="color: var(--charcoal); font-weight: 400;">
+            {brideSide.child}
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Groom's side -->
+      <div class="text-center md:pl-14 space-y-8">
+
+        <div>
+          <p class="label-text mb-2" style="color: var(--gold-text);">{groomSide.parentsLabel}</p>
+          <p class="font-display text-base md:text-lg" style="color: var(--charcoal); font-weight: 400;">
+            {groomSide.parents}
+          </p>
+        </div>
+
+        <div>
+          <p class="label-text mb-2" style="color: var(--gold-text);">{groomSide.honor.label}</p>
+          <p class="font-display text-base md:text-lg" style="color: var(--charcoal); font-weight: 400;">
+            {groomSide.honor.name}
+          </p>
+        </div>
+
+        <div>
+          <p class="label-text mb-2" style="color: var(--gold-text);">{groomSide.partyLabel}</p>
+          {groomSide.party.map((name) => (
+            <p class="font-display text-base md:text-lg" style="color: var(--charcoal); font-weight: 400; line-height: 1.7;">
+              {name}
+            </p>
+          ))}
+        </div>
+
+        <div>
+          <p class="label-text mb-2" style="color: var(--gold-text);">{groomSide.childLabel}</p>
+          <p class="font-display text-base md:text-lg" style="color: var(--charcoal); font-weight: 400;">
+            {groomSide.child}
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <p class="text-center font-body text-xs mt-14 md:mt-16" style="color: var(--text-light); letter-spacing: 0.05em;">
+      Names shown are placeholders — final entourage list to be confirmed.
+    </p>
+
+  </div>
+</section>

@@ -4,10 +4,12 @@ import config from "../lib/wedding-config";
 
 interface Props {
   title?: string;
+  canonicalUrl?: string;
 }
 
-const { title = `${config.couple.partner1} & ${config.couple.partner2} — ${config.date.display}` } = Astro.props;
+const { title = `${config.couple.partner1} & ${config.couple.partner2} — ${config.date.display}`, canonicalUrl } = Astro.props;
 const description = `Join ${config.couple.partner1} and ${config.couple.partner2} as they celebrate their wedding on ${config.date.display} at ${config.venue.name}, ${config.venue.city}.`;
+const ogImage = "/images/hero/hero-01.webp";
 ---
 
 <!doctype html>
@@ -15,15 +17,50 @@ const description = `Join ${config.couple.partner1} and ${config.couple.partner2
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FFFBF5" />
     <meta name="description" content={description} />
+
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <!-- Twitter / iMessage -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured data: Event -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": `${config.couple.partner1} & ${config.couple.partner2} Wedding`,
+      "startDate": config.date.iso,
+      "location": {
+        "@type": "Place",
+        "name": config.venue.name,
+        "address": config.venue.fullAddress
+      },
+      "description": description
+    })} />
+
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{title}</title>
   </head>
   <body>
+    <!-- Skip navigation for keyboard users -->
+    <a
+      href="#main-content"
+      class="absolute left-4 top-4 -translate-y-20 focus:translate-y-0 z-[200] px-4 py-2 bg-charcoal text-white text-sm font-medium transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-gold"
+      style="background-color: var(--charcoal); color: var(--white);"
+    >
+      Skip to main content
+    </a>
     <slot />
+    <!-- Tally embed script for RSVP popup -->
+    <script async src="https://tally.so/widgets/embed.js"></script>
   </body>
 </html>

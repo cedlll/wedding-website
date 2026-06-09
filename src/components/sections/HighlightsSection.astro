@@ -10,7 +10,7 @@ import config from "../../lib/wedding-config";
         class="font-display text-5xl md:text-6xl mb-6"
         style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
       >
-        The Venue
+        Where we're saying "I do"
       </h2>
       <div class="divider-line mt-6"></div>
     </div>
@@ -18,7 +18,7 @@ import config from "../../lib/wedding-config";
     <!-- Main venue image -->
     <div class="mb-16 overflow-hidden rounded-lg shadow-xl">
       <img
-        src="/images/venue/hacienda-solange.jpg"
+        src="/images/venue/hacienda-solange.webp"
         alt="Hacienda Solange"
         class="w-full h-auto object-cover"
         loading="lazy"
@@ -36,9 +36,7 @@ import config from "../../lib/wedding-config";
         </h3>
 
         <p class="text-lg leading-relaxed font-body mb-8" style="color: var(--text-muted); line-height: 1.8;">
-          A breathtaking 2-hectare garden estate featuring tree-lined grounds, stunning views of Taal Volcano,
-          and elegant covered venues. From intimate garden ceremonies to sophisticated evening receptions,
-          Hacienda Solange transforms throughout the day to create unforgettable celebrations.
+          Nestled in Alfonso, Cavite — a garden estate with tree-lined grounds and covered venues that carry the celebration from ceremony to reception.
         </p>
 
         <!-- Address -->
@@ -47,10 +45,7 @@ import config from "../../lib/wedding-config";
             Address
           </h4>
           <p class="text-base font-body" style="color: var(--charcoal); line-height: 1.7;">
-            047 Aguinaldo-Alfonso Rd.<br>
-            Brgy. Esperanza Ilaya<br>
-            Alfonso, Cavite 4123<br>
-            Philippines
+            047 Aguinaldo-Alfonso Rd., Brgy. Esperanza Ilaya, Alfonso, Cavite 4123, Philippines
           </p>
         </div>
 
@@ -67,22 +62,20 @@ import config from "../../lib/wedding-config";
         <!-- CTA buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="https://www.haciendasolange.com/"
+            href="https://www.google.com/maps/dir//Hacienda+Solange+Private+Events+Place,+Brgy,+047+Aguinaldo+-+Alfonso+Rd,+Esperanza+Ilaya,+Alfonso,+4123+Cavite/@14.1174533,120.8735937,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x33bd9d47d1e89481:0xe031168a76d5712!2m2!1d120.8757824!2d14.1174533!3e0?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-block px-8 py-4 text-center text-sm font-semibold tracking-wider uppercase transition-all duration-300 rounded"
-            style="background-color: var(--sage); color: var(--white); letter-spacing: 0.12em;"
+            class="venue-btn-primary inline-block px-8 py-4 text-center text-sm font-semibold tracking-wider uppercase transition-all duration-300 rounded"
+            style="background-color: var(--charcoal); color: var(--white); letter-spacing: 0.12em;"
           >
-            Visit Website
+            Take me there
           </a>
           <a
-            href="https://maps.google.com/?q=Hacienda+Solange+Alfonso+Cavite"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-block px-8 py-4 text-center text-sm font-semibold tracking-wider uppercase transition-all duration-300 rounded border-2"
-            style="border-color: var(--sage); color: var(--sage); letter-spacing: 0.12em;"
+            href="#accommodations"
+            class="venue-btn-secondary inline-block px-8 py-4 text-center text-sm font-semibold tracking-wider uppercase transition-all duration-300 rounded border-2"
+            style="border-color: var(--charcoal); color: var(--charcoal); letter-spacing: 0.12em;"
           >
-            Get Directions
+            Places to stay
           </a>
         </div>
 
@@ -95,16 +88,16 @@ import config from "../../lib/wedding-config";
 </section>
 
 <style>
-  a[href*="haciendasolange.com"]:hover {
-    background-color: var(--charcoal);
+  .venue-btn-primary:hover {
+    background-color: var(--charcoal-light) !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  a[href*="maps.google.com"]:hover {
-    background-color: var(--sage);
-    color: var(--white);
+  .venue-btn-secondary:hover {
+    background-color: var(--charcoal) !important;
+    color: var(--white) !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(138, 158, 122, 0.3);
+    box-shadow: 0 4px 12px rgba(42, 42, 42, 0.3);
   }
 </style>

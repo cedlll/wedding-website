@@ -5,6 +5,7 @@ import HighlightsSection from "../components/sections/HighlightsSection.astro";
 import PortfolioGallery from "../components/sections/PortfolioGallery.astro";
 import EventFlowSection from "../components/sections/EventFlowSection.astro";
 import AttireSection from "../components/sections/AttireSection.astro";
+import EntourageSection from "../components/sections/EntourageSection.astro";
 import AccommodationsSection from "../components/sections/AccommodationsSection.astro";
 import FaqSection from "../components/sections/FaqSection.astro";
 import RsvpSection from "../components/sections/RsvpSection.astro";
@@ -17,7 +18,7 @@ import StickyNav from "../components/islands/StickyNav";
 <Layout>
   <StickyNav client:load />
 
-  <main>
+  <main id="main-content">
     <!-- Hero Carousel (like Lovio) -->
     <Hero />
 
@@ -26,6 +27,9 @@ import StickyNav from "../components/islands/StickyNav";
 
     <!-- Attire Details -->
     <AttireSection />
+
+    <!-- Entourage -->
+    <EntourageSection />
 
     <!-- Photo Gallery -->
     <PortfolioGallery />

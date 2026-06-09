@@ -49,6 +49,8 @@
   --gold: #C5A572;
   --gold-light: #D4B685;
   --gold-dark: #B69563;
+  /* Accessible gold for small text labels — 4.6:1 contrast on white (WCAG AA) */
+  --gold-text: #8B6914;
 
   --divider: #E8E4DE;
   --divider-light: #F0EDE8;

@@ -108,7 +108,7 @@ const config: WeddingConfig = {
   },
 
   venue: {
-    name: "Hacienda Solange",
+    name: "Hacienda Solange Alfonso",
     city: "Alfonso, Cavite",
     country: "Philippines",
     fullAddress: "Hacienda Solange, Alfonso, Cavite, Philippines",
@@ -121,25 +121,25 @@ const config: WeddingConfig = {
   eventFlow: [
     {
       time: "3:00 PM",
-      title: "Wedding Ceremony",
+      title: "The vows",
       description:
         "Join us as we exchange our vows surrounded by the ones we love most. A moment of promises, unity, and the beginning of forever.",
     },
     {
       time: "4:00 PM",
-      title: "Cocktail Hour",
+      title: "Golden hour drinks",
       description:
         "Enjoy refreshing drinks and light appetizers while mingling with fellow guests in the garden as the golden hour sets in.",
     },
     {
       time: "5:30 PM",
-      title: "Dinner Reception",
+      title: "Sit down & celebrate",
       description:
         "A celebration of love with heartfelt toasts, a curated dinner, and stories shared over candlelit tables under the stars.",
     },
     {
       time: "7:30 PM \u2013 Late",
-      title: "After Party",
+      title: "Keep the night going",
       description:
         "The night is young and the dance floor awaits. Let loose, celebrate, and make memories that will last a lifetime.",
     },
@@ -155,7 +155,7 @@ const config: WeddingConfig = {
           title: "Gentlemen",
           description:
             "Traditional Barong Tagalog drawn from a warm, understated palette — cream and almond.",
-          image: "/images/attire/gentlemen.jpg",
+          image: "/images/attire/gentlemen.webp",
           colorPalette: [
             { name: "Cream", hex: "#F5ECD7" },
             { name: "Almond", hex: "#E8DAC3" },
@@ -165,7 +165,7 @@ const config: WeddingConfig = {
           title: "Ladies",
           description:
             "From the soft stillness of sage and dusty sage to the deep, grounded richness of moss and forest green.",
-          image: "/images/attire/ladies-sponsor.jpg",
+          image: "/images/attire/ladies-sponsor.webp",
           colorPalette: [
             { name: "Sage", hex: "#B3C5A8" },
             { name: "Dusty Sage", hex: "#8FAE82" },
@@ -175,14 +175,14 @@ const config: WeddingConfig = {
         },
       },
       {
-        label: "All Guests",
+        label: "All guests",
         theme: "Formal",
         description: "",
         men: {
           title: "Gentlemen",
           description:
             "Formal attire in a palette as warm and unhurried as the earth itself — cream, almond, tan, and brown.",
-          image: "/images/attire/gentlemen-guest.jpg",
+          image: "/images/attire/gentlemen-guest.webp",
           colorPalette: [
             { name: "Cream", hex: "#F5ECD7" },
             { name: "Almond", hex: "#E8DAC3" },
@@ -194,7 +194,7 @@ const config: WeddingConfig = {
           title: "Ladies",
           description:
             "From the delicate softness of cream and almond to the grounded richness of tan and brown.",
-          image: "/images/attire/ladies-guest.jpg",
+          image: "/images/attire/ladies-guest.webp",
           colorPalette: [
             { name: "Cream", hex: "#F5ECD7" },
             { name: "Almond", hex: "#E8DAC3" },
@@ -270,21 +270,21 @@ const config: WeddingConfig = {
   story: [
     {
       year: "2019",
-      title: "The First Hello",
+      title: "When we met",
       description:
         "What started as a chance encounter at a gathering of friends quickly became the most meaningful conversation of our lives. From that moment, everything changed.",
       image: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&h=1000&fit=crop",
     },
     {
       year: "2024",
-      title: "The Proposal",
+      title: "The yes",
       description:
         "With the golden sun setting over the horizon and the sound of waves as our witness, one knee touched the sand and a forever question was asked.",
       image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&h=1000&fit=crop",
     },
     {
       year: "2026",
-      title: "The Celebration",
+      title: "Here we are",
       description:
         "And now, surrounded by the people who mean the most to us, we begin the next chapter of our story \u2014 together, always.",
       image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=1000&fit=crop",
@@ -299,13 +299,13 @@ const config: WeddingConfig = {
       image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=800&fit=crop",
     },
     {
-      title: "Cozy Stays",
+      title: "Cozy stays",
       description:
         "From boutique bed-and-breakfasts to hillside villas, find the perfect place to rest before or after the celebration.",
       image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=800&fit=crop",
     },
     {
-      title: "Spa & Wellness",
+      title: "Spa & wellness",
       description:
         "Treat yourself to a rejuvenating experience at one of the area's renowned wellness retreats and hot spring resorts.",
       image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=800&fit=crop",
@@ -319,7 +319,7 @@ const config: WeddingConfig = {
         "Luxury lakeside hotel with stunning Taal views, spa facilities, and fine dining. Perfect for a relaxing stay.",
       distance: "5 minutes from venue",
       website: "https://example.com",
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop",
+      image: "/images/accommodations/lake-hotel.webp",
     },
     {
       name: "Wingate Manor",
@@ -327,7 +327,7 @@ const config: WeddingConfig = {
         "Charming boutique hotel with cozy rooms, beautiful gardens, and a warm atmosphere.",
       distance: "10 minutes from venue",
       website: "https://example.com",
-      image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&h=400&fit=crop",
+      image: "/images/accommodations/wingate-manor.webp",
     },
     {
       name: "Twin Lakes Hotel",
@@ -335,7 +335,7 @@ const config: WeddingConfig = {
         "Modern resort with golf course access, multiple dining options, and spacious accommodations.",
       distance: "15 minutes from venue",
       website: "https://example.com",
-      image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop",
+      image: "/images/accommodations/twin-lakes.webp",
     },
   ],
 
@@ -343,7 +343,7 @@ const config: WeddingConfig = {
     photos: Array.from({ length: 104 }, (_, i) => {
       const n = i + 1;
       const filename = n < 100 ? String(n).padStart(2, "0") : String(n);
-      return { src: `/images/prenup/${filename}.jpg`, alt: `Cedric & Karen - Photo ${n}` };
+      return { src: `/images/prenup/${filename}.webp`, alt: `Cedric & Karen - Photo ${n}` };
     }),
   },
 

@@ -2,11 +2,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import config from "../../lib/wedding-config";
 
-// Hero carousel images
+// Hero carousel images (WebP for performance)
 const heroImages = Array.from({ length: 10 }, (_, i) => {
   const n = i + 1;
   const filename = String(n).padStart(2, "0");
-  return `/images/hero/hero-${filename}.jpg`;
+  return `/images/hero/hero-${filename}.webp`;
 });
 
 // Ken Burns motion variants — alternating subtle pan + zoom directions
@@ -29,6 +29,8 @@ export default function HeroAnimation() {
 
   return (
     <div className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+      {/* Visually hidden h1 for screen readers and SEO */}
+      <h1 className="sr-only">Cedric &amp; Karen — November 7, 2026</h1>
       {/* Image Carousel */}
       <AnimatePresence initial={false}>
         <motion.div
@@ -50,22 +52,6 @@ export default function HeroAnimation() {
           <div className="absolute inset-0 bg-black/40" />
         </motion.div>
       </AnimatePresence>
-
-      {/* Carousel Indicators */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {heroImages.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentIndex(i)}
-            className="w-2 h-2 rounded-full transition-all duration-300"
-            style={{
-              backgroundColor: i === currentIndex ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0.3)",
-              width: i === currentIndex ? "32px" : "8px",
-            }}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
-      </div>
 
       {/* Content */}
       <motion.div
@@ -96,15 +82,20 @@ export default function HeroAnimation() {
           {config.venue.name}, {config.venue.city}
         </motion.p>
 
-        <motion.a
-          href="#rsvp"
-          className="inline-block px-12 py-4 text-xs font-semibold tracking-wider uppercase border-2 border-white text-charcoal bg-white transition-all duration-300 hover:bg-transparent hover:text-white"
+        <motion.button
+          data-tally-open="dWzjaA"
+          data-tally-layout="modal"
+          data-tally-overlay="1"
+          data-tally-width="700"
+          data-tally-emoji-text="💍"
+          data-tally-emoji-animation="wave"
+          className="inline-block px-12 py-4 text-xs font-semibold tracking-wider uppercase border-2 border-white text-charcoal bg-white transition-all duration-300 hover:bg-transparent hover:text-white cursor-pointer"
           style={{ letterSpacing: "0.15em" }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          RSVP Now
-        </motion.a>
+          Save your seat
+        </motion.button>
       </motion.div>
     </div>
   );

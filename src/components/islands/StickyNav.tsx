@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const sections = [
-  { id: "the-day", label: "The Day" },
+  { id: "the-day", label: "Our day" },
   { id: "faq", label: "FAQ" },
   { id: "rsvp", label: "RSVP" },
 ];
@@ -85,6 +85,7 @@ export default function StickyNav() {
           </div>
 
           <motion.button
+            type="button"
             className="md:hidden flex flex-col gap-1.5 p-2 relative"
             style={{ zIndex: 60 }}
             onClick={() => setMenuOpen(!menuOpen)}

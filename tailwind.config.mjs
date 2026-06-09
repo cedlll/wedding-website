@@ -28,6 +28,7 @@ export default {
           DEFAULT: '#C5A572',
           light: '#D4B685',
           dark: '#B69563',
+          text: '#8B6914', // WCAG AA accessible gold for small text (4.6:1 on white)
         },
         divider: {
           DEFAULT: '#E8E4DE',
