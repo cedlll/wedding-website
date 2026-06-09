@@ -60,7 +60,7 @@ const ogImage = "/images/hero/hero-01.webp";
       Skip to main content
     </a>
     <slot />
-    <!-- Tally embed script for RSVP popup -->
-    <script async src="https://tally.so/widgets/embed.js"></script>
+    <!-- Tally embed script for RSVP popup (is:inline bypasses Vite processing; snippet calls loadEmbeds() explicitly after load) -->
+    <script is:inline>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("[data-tally-src]:not([data-tally-loaded])").forEach((function(e){e.dataset.tallyLoaded=1;var t=d.createElement("iframe");t.setAttribute("src",e.dataset.tallySrc),t.setAttribute("width","100%");var n=e.dataset.tallyHeight,r=e.dataset.tallyPage;n&&t.setAttribute("height",n),r&&t.setAttribute("height","auto"),e.parentNode.insertBefore(t,e),e.remove()}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s)}</script>
   </body>
 </html>
