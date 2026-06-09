@@ -3,14 +3,6 @@ import config from "../../lib/wedding-config";
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
-function palettesMatch(
-  a: Array<{ name: string; hex: string }>,
-  b: Array<{ name: string; hex: string }>
-) {
-  if (a.length !== b.length) return false;
-  return a.every((c, i) => c.hex === b[i].hex);
-}
-
 function PaletteRow({
   colors,
 }: {
@@ -42,6 +34,7 @@ function PaletteRow({
 function AttireCard({
   role,
   index,
+  showPalette,
 }: {
   role: {
     title: string;
@@ -50,6 +43,7 @@ function AttireCard({
     colorPalette: Array<{ name: string; hex: string }>;
   };
   index: number;
+  showPalette?: boolean;
 }) {
   if (!role.image) return null;
 
@@ -93,6 +87,13 @@ function AttireCard({
           {role.description}
         </p>
       )}
+
+      {/* Per-card palette */}
+      {showPalette && (
+        <div className="mt-6">
+          <PaletteRow colors={role.colorPalette} />
+        </div>
+      )}
     </motion.div>
   );
 }
@@ -103,11 +104,6 @@ export default function AttireSection() {
   return (
     <div className="space-y-20 md:space-y-28">
       {attire.groups.map((group) => {
-        const shared = palettesMatch(
-          group.men.colorPalette,
-          group.women.colorPalette
-        );
-
         return (
           <div key={group.label}>
             {/* Group Label */}
@@ -124,44 +120,9 @@ export default function AttireSection() {
 
             {/* Two-column: men + women side by side at large, stacked on mobile */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6 px-4 md:px-8 max-w-5xl mx-auto">
-              <AttireCard role={group.men} index={0} />
-              <AttireCard role={group.women} index={1} />
+              <AttireCard role={group.men} index={0} showPalette />
+              <AttireCard role={group.women} index={1} showPalette />
             </div>
-
-            {/* Shared palette below both cards */}
-            {shared && (
-              <motion.div
-                className="mt-10 md:mt-12"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.15, ease }}
-              >
-                <PaletteRow colors={group.men.colorPalette} />
-              </motion.div>
-            )}
-
-            {/* Per-role palettes when they differ */}
-            {!shared && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6 px-4 md:px-8 max-w-5xl mx-auto mt-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease }}
-                >
-                  <PaletteRow colors={group.men.colorPalette} />
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1, ease }}
-                >
-                  <PaletteRow colors={group.women.colorPalette} />
-                </motion.div>
-              </div>
-            )}
           </div>
         );
       })}

@@ -22,7 +22,7 @@ import config from "../../lib/wedding-config";
     <!-- Accommodations Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
       {config.accommodations.map((accommodation) => (
-        <div class="card-hover bg-cream rounded-sm overflow-hidden">
+        <div class="card-hover bg-cream rounded-sm overflow-hidden reveal-on-scroll">
           <div class="card-image-hover aspect-[3/2] overflow-hidden">
             <img
               src={accommodation.image}

@@ -86,15 +86,25 @@ function FaqItem({
             }}
             className="overflow-hidden"
           >
-            <motion.p
-              className="pb-7 pr-12 leading-relaxed text-base font-body"
+            <motion.div
+              className="pb-7 pr-12 leading-relaxed text-base font-body space-y-3"
               style={{ color: "var(--text-muted)", lineHeight: 1.7 }}
               initial={{ y: -8 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
             >
-              {answer}
-            </motion.p>
+              {answer.split("\n\n").map((paragraph, pi) => (
+                <p key={pi}>
+                  {paragraph.split(/(\*\*.*?\*\*)/).map((part, si) =>
+                    part.startsWith("**") && part.endsWith("**") ? (
+                      <strong key={si} style={{ color: "var(--charcoal)" }}>{part.slice(2, -2)}</strong>
+                    ) : (
+                      part
+                    )
+                  )}
+                </p>
+              ))}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

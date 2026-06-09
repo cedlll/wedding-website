@@ -103,13 +103,13 @@ const config: WeddingConfig = {
     display: "November 7, 2026",
     dayOfWeek: "Saturday",
     iso: "2026-11-07",
-    rsvpDeadline: "October 1, 2026",
+    rsvpDeadline: "September 30, 2026",
     rsvpDeadlineIso: "2026-10-01",
   },
 
   venue: {
     name: "Hacienda Solange Alfonso",
-    city: "Alfonso, Cavite",
+    city: "Cavite",
     country: "Philippines",
     fullAddress: "Hacienda Solange, Alfonso, Cavite, Philippines",
     googleMapsUrl: "https://maps.google.com/?q=Hacienda+Solange+Alfonso+Cavite",
@@ -243,7 +243,7 @@ const config: WeddingConfig = {
     {
       question: "What is the dress code?",
       answer:
-        "Filipiniana Formal. Gentlemen in Barong Tagalog and ladies in modern Filipiniana or terno. Please refer to the Attire & Palette section for the approved color palette.",
+        "**Principal & Secondary Sponsors:** Gentlemen are requested to wear the traditional Barong Tagalog. Ladies are asked to wear formal gowns in sage, dusty sage, moss, or forest green.\n\n**Guests:** Formal attire in cream, almond, tan, or brown is kindly requested for both gentlemen and ladies.\n\nPlease see the dress code section for further inspiration.",
     },
     {
       question: "What time should I arrive?",
@@ -253,17 +253,12 @@ const config: WeddingConfig = {
     {
       question: "Can I bring a plus one?",
       answer:
-        "Due to limited seating, we kindly ask that only those named on the invitation attend. If you have questions, please reach out to us directly.",
+        "Due to limited seating, we kindly ask that only those named on the invitation attend.",
     },
     {
       question: "Is parking available?",
       answer:
         "Yes, complimentary parking is available at the venue. Attendants will guide you upon arrival.",
-    },
-    {
-      question: "Are children welcome?",
-      answer:
-        "While we love your little ones, this will be an adults-only celebration. We hope you understand and enjoy a night out!",
     },
   ],
 

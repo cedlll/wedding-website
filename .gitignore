@@ -3,3 +3,4 @@ dist/
 
 # Claude Code local worktrees (nested git repos)
 .claude/
+.vercel

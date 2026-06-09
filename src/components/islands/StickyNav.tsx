@@ -1,10 +1,20 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
+const tallyAttrs = {
+  "data-tally-open": "dWzjaA",
+  "data-tally-layout": "modal",
+  "data-tally-overlay": "1",
+  "data-tally-width": "700",
+  "data-tally-emoji-text": "\u{1F48D}",
+  "data-tally-emoji-animation": "wave",
+};
+
 const sections = [
   { id: "the-day", label: "Our day" },
   { id: "faq", label: "FAQ" },
-  { id: "rsvp", label: "RSVP" },
+  { id: "contact", label: "Contact", mailto: "cedricandkaren2026@gmail.com" },
+  { id: "rsvp", label: "RSVP", isTally: true },
 ];
 
 export default function StickyNav() {
@@ -59,11 +69,13 @@ export default function StickyNav() {
           </motion.a>
 
           <div className="hidden md:flex items-center gap-12">
-            {sections.map(({ id, label }) => (
+            {sections.map(({ id, label, isTally, mailto }) => (
               <motion.a
                 key={id}
-                href={`#${id}`}
-                className={`text-xs font-medium tracking-wider uppercase transition-colors duration-300 relative ${
+                href={mailto ? `mailto:${mailto}` : isTally ? "#" : `#${id}`}
+                onClick={isTally ? (e: React.MouseEvent) => e.preventDefault() : undefined}
+                {...(isTally ? tallyAttrs : {})}
+                className={`text-xs font-medium tracking-wider uppercase transition-colors duration-300 relative cursor-pointer ${
                   scrolled ? "text-charcoal" : "text-white"
                 }`}
                 style={{ letterSpacing: "0.12em" }}
@@ -128,11 +140,16 @@ export default function StickyNav() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            {sections.map(({ id, label }, i) => (
+            {sections.map(({ id, label, isTally, mailto }, i) => (
               <motion.a
                 key={id}
-                href={`#${id}`}
-                className="font-display text-4xl relative"
+                href={mailto ? `mailto:${mailto}` : isTally ? "#" : `#${id}`}
+                onClick={(e: React.MouseEvent) => {
+                  if (isTally) e.preventDefault();
+                  setMenuOpen(false);
+                }}
+                {...(isTally ? tallyAttrs : {})}
+                className="font-display text-4xl relative cursor-pointer"
                 style={{ color: "var(--charcoal)", letterSpacing: "0.02em" }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -146,7 +163,6 @@ export default function StickyNav() {
                   x: 8,
                   color: "var(--gold)",
                 }}
-                onClick={() => setMenuOpen(false)}
               >
                 {label}
               </motion.a>

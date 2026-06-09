@@ -6,7 +6,7 @@ const allPhotos = config.gallery.photos;
 
 const tilts = ["scrapbook-tilt-2", "scrapbook-tilt-4", "scrapbook-tilt-1", "scrapbook-tilt-6"];
 const tapeVariants = ["washi-tape--top-left", "washi-tape--top-right", "washi-tape--top-left washi-tape--cream", "washi-tape--top-right"];
-const captions = ["forever starts here", "us, always", "love & laughter", "our favorite place"];
+const captions = ["First photo", "First international travel", "love & laughter", "our favorite place"];
 ---
 
 <section id="gallery" class="py-24 md:py-32 px-6 paper-texture" style="background-color: var(--cream);">
@@ -14,21 +14,21 @@ const captions = ["forever starts here", "us, always", "love & laughter", "our f
     <!-- Section header with handwriting accent -->
     <div class="text-center mb-20">
       <p class="font-handwriting text-2xl md:text-3xl mb-2" style="color: var(--gold); transform: rotate(-1deg);">
-        our favorite moments
+        about us
       </p>
       <h2
         class="font-display text-5xl md:text-6xl mb-6"
         style="color: var(--charcoal); letter-spacing: 0.02em; font-weight: 400;"
       >
-        Before the big day
+        Our firsts
       </h2>
       <div class="divider-line mt-6"></div>
     </div>
 
-    <!-- Scrapbook Grid (featured 4) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-4xl mx-auto">
+    <!-- Scrapbook Grid: horizontal scroll on mobile, 2-col grid on desktop -->
+    <div class="gallery-scrapbook flex md:grid md:grid-cols-2 gap-6 md:gap-16 max-w-4xl mx-auto overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 -mx-6 px-6 md:mx-auto md:px-0">
       {featuredItems.map((photo, i) => (
-        <div class={`relative scrapbook-photo ${tilts[i]} group cursor-pointer`}>
+        <div class={`relative scrapbook-photo ${tilts[i]} group cursor-pointer flex-shrink-0 w-[75vw] md:w-auto snap-center reveal-on-scroll`}>
           {/* Washi tape */}
           <div class={`washi-tape ${tapeVariants[i]}`} />
 

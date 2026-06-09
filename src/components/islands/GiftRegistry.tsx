@@ -133,7 +133,7 @@ export default function GiftRegistry() {
   return (
     <div>
       <motion.p
-        className="font-serif text-lg md:text-xl italic leading-relaxed text-center max-w-xl mx-auto mb-14"
+        className="font-serif text-lg md:text-xl leading-relaxed text-center max-w-xl mx-auto mb-14"
         style={{ color: "var(--forest)" }}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
