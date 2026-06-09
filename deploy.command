@@ -28,17 +28,10 @@ if [ -d ".vercel" ]; then
   echo ""
   vercel --prod
 else
-  echo "🆕 No existing Vercel project link found."
-  echo "   Starting new project setup..."
+  echo "🆕 First-time setup — creating & deploying to production..."
+  echo "   (You're already logged in)"
   echo ""
-  echo "   When prompted:"
-  echo "   • Scope:         your personal account or team"
-  echo "   • Project name:  wedding-website (or press Enter)"
-  echo "   • Directory:     ./ (press Enter)"
-  echo "   • Build command: npm run build  ← use this"
-  echo "   • Output dir:    dist            ← use this"
-  echo ""
-  vercel
+  vercel --prod --yes
 fi
 
 echo ""
