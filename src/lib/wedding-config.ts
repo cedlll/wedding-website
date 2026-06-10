@@ -46,7 +46,7 @@ export interface WeddingConfig {
     label: string;
     accountName: string;
     accountNumber: string;
-    qrImagePath: string;
+    qrImagePath?: string;
   }>;
   rsvp: {
     googleFormUrl: string;
@@ -76,9 +76,10 @@ export interface WeddingConfig {
   }>;
   accommodations: Array<{
     name: string;
+    highlight: string;
     description: string;
-    distance: string;
     website?: string;
+    phone?: string;
     image: string;
   }>;
   gallery: {
@@ -155,7 +156,7 @@ const config: WeddingConfig = {
           title: "Gentlemen",
           description:
             "Traditional Barong Tagalog drawn from a warm, understated palette — cream and almond.",
-          image: "/images/attire/gentlemen.webp",
+          image: "/images/attire/gentlemen-sponsor.png",
           colorPalette: [
             { name: "Cream", hex: "#F5ECD7" },
             { name: "Almond", hex: "#E8DAC3" },
@@ -165,7 +166,7 @@ const config: WeddingConfig = {
           title: "Ladies",
           description:
             "From the soft stillness of sage and dusty sage to the deep, grounded richness of moss and forest green.",
-          image: "/images/attire/ladies-sponsor.webp",
+          image: "/images/attire/ladies-sponsor.png",
           colorPalette: [
             { name: "Sage", hex: "#B3C5A8" },
             { name: "Dusty Sage", hex: "#8FAE82" },
@@ -182,7 +183,7 @@ const config: WeddingConfig = {
           title: "Gentlemen",
           description:
             "Formal attire in a palette as warm and unhurried as the earth itself — cream, almond, tan, and brown.",
-          image: "/images/attire/gentlemen-guest.webp",
+          image: "/images/attire/gentlemen-guest.png",
           colorPalette: [
             { name: "Cream", hex: "#F5ECD7" },
             { name: "Almond", hex: "#E8DAC3" },
@@ -194,7 +195,7 @@ const config: WeddingConfig = {
           title: "Ladies",
           description:
             "From the delicate softness of cream and almond to the grounded richness of tan and brown.",
-          image: "/images/attire/ladies-guest.webp",
+          image: "/images/attire/ladies-guest.png",
           colorPalette: [
             { name: "Cream", hex: "#F5ECD7" },
             { name: "Almond", hex: "#E8DAC3" },
@@ -208,22 +209,16 @@ const config: WeddingConfig = {
 
   gifts: [
     {
-      label: "GCash",
-      accountName: "// TODO: account name",
-      accountNumber: "// TODO: account number",
-      qrImagePath: "/images/qr/placeholder-gcash.png",
-    },
-    {
-      label: "Maya",
-      accountName: "// TODO: account name",
-      accountNumber: "// TODO: account number",
-      qrImagePath: "/images/qr/placeholder-maya.png",
+      label: "BDO",
+      accountName: "Clarence Cedric Lee",
+      accountNumber: "011860037850",
+      qrImagePath: "/images/qr/BDO.JPG",
     },
     {
       label: "BPI",
-      accountName: "// TODO: account name",
-      accountNumber: "// TODO: account number",
-      qrImagePath: "/images/qr/placeholder-bpi.png",
+      accountName: "Clarence Cedric Lee",
+      accountNumber: "3729376026",
+      qrImagePath: "/images/qr/BPI.PNG",
     },
   ],
 
@@ -309,28 +304,31 @@ const config: WeddingConfig = {
 
   accommodations: [
     {
-      name: "The Lake Hotel",
+      name: "Anya Resort Tagaytay",
+      highlight: "Best Overall",
       description:
-        "Luxury lakeside hotel with stunning Taal views, spa facilities, and fine dining. Perfect for a relaxing stay.",
-      distance: "5 minutes from venue",
-      website: "https://example.com",
-      image: "/images/accommodations/lake-hotel.webp",
+        "Top-rated luxury resort in the area with spacious suites, a full spa, pool, and exceptional service — an ideal choice for family and VIP guests.",
+      website: "https://anyaresorts.com",
+      phone: "+63 917 704 6159",
+      image: "/images/accommodations/anya-resort.webp",
     },
     {
-      name: "Wingate Manor",
+      name: "Escala Tagaytay",
+      highlight: "Most Popular",
       description:
-        "Charming boutique hotel with cozy rooms, beautiful gardens, and a warm atmosphere.",
-      distance: "10 minutes from venue",
-      website: "https://example.com",
-      image: "/images/accommodations/wingate-manor.webp",
+        "Well-established hotel with gorgeous Taal volcano views, consistently praised for its warm service and beloved breakfast spread.",
+      website: "https://escalatagaytay.com",
+      phone: "+63 2 8519 4444",
+      image: "/images/accommodations/escala-tagaytay.webp",
     },
     {
-      name: "Twin Lakes Hotel",
+      name: "Nurture Wellness Village",
+      highlight: "Best for Wellness",
       description:
-        "Modern resort with golf course access, multiple dining options, and spacious accommodations.",
-      distance: "15 minutes from venue",
-      website: "https://example.com",
-      image: "/images/accommodations/twin-lakes.webp",
+        "A spa-forward retreat surrounded by lush gardens, offering traditional Filipino healing treatments — perfect for winding down before or after the celebration.",
+      website: "https://nurture.com.ph",
+      phone: "+63 917 687 8873",
+      image: "/images/accommodations/nurture-wellness.webp",
     },
   ],
 

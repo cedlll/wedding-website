@@ -21,21 +21,21 @@ function CheckIcon({ size = 14 }: { size?: number }) {
 
 function GiftCard({ gift }: { gift: (typeof config.gifts)[number] }) {
   const [revealed, setRevealed] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
 
-  const handleCopy = async () => {
+  const handleCopy = async (text: string, field: string) => {
     try {
-      await navigator.clipboard.writeText(gift.accountNumber);
+      await navigator.clipboard.writeText(text);
     } catch {
       const t = document.createElement("textarea");
-      t.value = gift.accountNumber;
+      t.value = text;
       document.body.appendChild(t);
       t.select();
       document.execCommand("copy");
       document.body.removeChild(t);
     }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
   };
 
   return (
@@ -77,43 +77,65 @@ function GiftCard({ gift }: { gift: (typeof config.gifts)[number] }) {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <p className="text-sm mb-1" style={{ color: "var(--forest-dark)" }}>
-              {gift.accountName}
-            </p>
-
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <span
-                className="text-xs tracking-widest uppercase"
-                style={{ color: "var(--forest)" }}
-              >
-                {gift.accountNumber}
-              </span>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleCopy();
-                }}
-                className="p-1 transition-colors hover:opacity-70"
-                style={{ color: "var(--forest)" }}
-                aria-label={`Copy ${gift.label} account number`}
-              >
-                {copied ? <CheckIcon /> : <CopyIcon />}
-              </button>
+            <div className="mb-3">
+              <p className="text-xs tracking-wider uppercase mb-1" style={{ color: "var(--forest)" }}>
+                Account Name
+              </p>
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-sm" style={{ color: "var(--forest-dark)" }}>
+                  {gift.accountName}
+                </span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCopy(gift.accountName, "name");
+                  }}
+                  className="p-1 transition-colors hover:opacity-70"
+                  style={{ color: "var(--forest)" }}
+                  aria-label={`Copy ${gift.label} account name`}
+                >
+                  {copiedField === "name" ? <CheckIcon /> : <CopyIcon />}
+                </button>
+              </div>
             </div>
 
-            <img
-              src={gift.qrImagePath}
-              alt={`${gift.label} QR code`}
-              className="w-32 h-32 mx-auto object-contain"
-              loading="lazy"
-            />
+            <div>
+              <p className="text-xs tracking-wider uppercase mb-1" style={{ color: "var(--forest)" }}>
+                Account Number
+              </p>
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-sm tracking-widest" style={{ color: "var(--forest-dark)" }}>
+                  {gift.accountNumber}
+                </span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCopy(gift.accountNumber, "number");
+                  }}
+                  className="p-1 transition-colors hover:opacity-70"
+                  style={{ color: "var(--forest)" }}
+                  aria-label={`Copy ${gift.label} account number`}
+                >
+                  {copiedField === "number" ? <CheckIcon /> : <CopyIcon />}
+                </button>
+              </div>
+            </div>
+
+            {gift.qrImagePath && (
+              <img
+                src={gift.qrImagePath}
+                alt={`${gift.label} QR code`}
+                className="w-32 h-32 mx-auto mt-4 object-contain"
+                loading="lazy"
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Copy toast */}
       <AnimatePresence>
-        {copied && (
+        {copiedField && (
           <motion.div
             className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 text-xs tracking-wider uppercase shadow-lg"
             style={{ backgroundColor: "var(--forest-dark)", color: "var(--cream)" }}
@@ -144,7 +166,7 @@ export default function GiftRegistry() {
         But if you wish to bless our new beginning...
       </motion.p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
         {config.gifts.map((gift, i) => (
           <motion.div
             key={i}

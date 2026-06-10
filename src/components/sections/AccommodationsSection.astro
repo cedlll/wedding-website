@@ -38,24 +38,35 @@ import config from "../../lib/wedding-config";
             </h3>
 
             <p class="label-text mb-4" style="color: var(--gold-text);">
-              {accommodation.distance}
+              {accommodation.highlight}
             </p>
 
             <p class="text-text-muted mb-6" style="font-size: 14px; line-height: 1.7;">
               {accommodation.description}
             </p>
 
-            {accommodation.website && (
-              <a
-                href={accommodation.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-block text-sm font-medium uppercase tracking-wider transition-colors"
-                style="color: var(--charcoal); letter-spacing: 0.1em; border-bottom: 1px solid var(--gold);"
-              >
-                View website →
-              </a>
-            )}
+            <div class="flex flex-wrap gap-x-5 gap-y-2">
+              {accommodation.website && (
+                <a
+                  href={accommodation.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-block text-sm font-medium uppercase tracking-wider transition-colors"
+                  style="color: var(--charcoal); letter-spacing: 0.1em; border-bottom: 1px solid var(--gold);"
+                >
+                  Website →
+                </a>
+              )}
+              {accommodation.phone && (
+                <a
+                  href={`tel:${accommodation.phone.replace(/\s/g, '')}`}
+                  class="inline-block text-sm font-medium uppercase tracking-wider transition-colors"
+                  style="color: var(--charcoal); letter-spacing: 0.1em; border-bottom: 1px solid var(--gold);"
+                >
+                  Call →
+                </a>
+              )}
+            </div>
           </div>
         </div>
       ))}
