@@ -12,6 +12,7 @@ const tallyAttrs = {
 
 const sections = [
   { id: "the-day", label: "Our day" },
+  { id: "gifts", label: "Gifts" },
   { id: "faq", label: "FAQ" },
   { id: "contact", label: "Contact", mailto: "cedricandkaren2026@gmail.com" },
   { id: "rsvp", label: "RSVP", isTally: true },
