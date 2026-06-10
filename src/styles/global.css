@@ -401,6 +401,9 @@ body {
 .gallery-scrapbook {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
+  -webkit-overflow-scrolling: touch; /* momentum scrolling on iOS */
+  touch-action: pan-x; /* let horizontal swipes pan the carousel instead of being captured by page scroll */
+  overscroll-behavior-x: contain;
 }
 .gallery-scrapbook::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
