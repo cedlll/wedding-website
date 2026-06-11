@@ -9,7 +9,9 @@ const tapeVariants = ["washi-tape--top-left", "washi-tape--top-right", "washi-ta
 const captions = ["First photo", "First international travel", "love & laughter", "our favorite place"];
 ---
 
-<section id="gallery" class="py-24 md:py-32 px-6 paper-texture" style="background-color: var(--cream);">
+<!-- Top padding is trimmed because this section shares the cream background of the
+     preceding entourage section; that section's bottom padding supplies the gap. -->
+<section id="gallery" class="pt-4 pb-24 md:pt-6 md:pb-32 px-6 paper-texture" style="background-color: var(--cream);">
   <div class="max-w-6xl mx-auto">
     <!-- Section header with handwriting accent -->
     <div class="text-center mb-20">
