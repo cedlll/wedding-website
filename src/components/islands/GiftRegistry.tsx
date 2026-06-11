@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import config from "../../lib/wedding-config";
 
-function CopyIcon({ size = 14 }: { size?: number }) {
+function CopyIcon({ size = 15 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
@@ -11,7 +11,7 @@ function CopyIcon({ size = 14 }: { size?: number }) {
   );
 }
 
-function CheckIcon({ size = 14 }: { size?: number }) {
+function CheckIcon({ size = 15 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20 6 9 17 4 12" />
@@ -19,8 +19,102 @@ function CheckIcon({ size = 14 }: { size?: number }) {
   );
 }
 
+/** Chevron that flips to point up when the card is open — a functional toggle cue. */
+function ToggleIcon({ open }: { open: boolean }) {
+  return (
+    <motion.svg
+      width={18}
+      height={18}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      animate={{ rotate: open ? 180 : 0 }}
+      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </motion.svg>
+  );
+}
+
+function CopyButton({
+  value,
+  active,
+  onCopy,
+  ariaLabel,
+}: {
+  value: string;
+  active: boolean;
+  onCopy: () => void;
+  ariaLabel: string;
+}) {
+  return (
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        onCopy();
+      }}
+      className="shrink-0 p-2 transition-colors"
+      style={{ color: active ? "var(--gold)" : "var(--text-muted)" }}
+      onMouseEnter={(e) => {
+        if (!active) e.currentTarget.style.color = "var(--charcoal)";
+      }}
+      onMouseLeave={(e) => {
+        if (!active) e.currentTarget.style.color = "var(--text-muted)";
+      }}
+      aria-label={ariaLabel}
+    >
+      {active ? <CheckIcon /> : <CopyIcon />}
+    </button>
+  );
+}
+
+function DetailRow({
+  label,
+  value,
+  emphasize = false,
+  copied,
+  onCopy,
+  copyLabel,
+}: {
+  label: string;
+  value: string;
+  emphasize?: boolean;
+  copied: boolean;
+  onCopy: () => void;
+  copyLabel: string;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-3 text-left">
+      <div className="min-w-0">
+        <p
+          className="text-[10px] tracking-[0.18em] uppercase mb-1.5"
+          style={{ color: "var(--text-muted)" }}
+        >
+          {label}
+        </p>
+        <p
+          className="truncate"
+          style={{
+            color: "var(--charcoal)",
+            fontSize: emphasize ? "1.05rem" : "0.9rem",
+            letterSpacing: emphasize ? "0.08em" : "normal",
+            fontWeight: emphasize ? 500 : 400,
+          }}
+        >
+          {value}
+        </p>
+      </div>
+      <CopyButton value={value} active={copied} onCopy={onCopy} ariaLabel={copyLabel} />
+    </div>
+  );
+}
+
 function GiftCard({ gift }: { gift: (typeof config.gifts)[number] }) {
   const [revealed, setRevealed] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const handleCopy = async (text: string, field: string) => {
@@ -38,97 +132,91 @@ function GiftCard({ gift }: { gift: (typeof config.gifts)[number] }) {
     setTimeout(() => setCopiedField(null), 2000);
   };
 
+  const accent = revealed || hovered;
+
   return (
-    <div className="text-center">
-      {/* Card */}
+    <div
+      className="h-full transition-shadow duration-300"
+      style={{
+        border: `1px solid ${accent ? "var(--gold)" : "var(--divider)"}`,
+        backgroundColor: revealed ? "var(--white)" : hovered ? "var(--cream-dark)" : "transparent",
+        boxShadow: hovered && !revealed ? "0 10px 30px rgba(0,0,0,0.06)" : "none",
+        transition: "border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease",
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Trigger row */}
       <button
         onClick={() => setRevealed(!revealed)}
-        className="w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-warm"
+        className="w-full flex items-center justify-between gap-4 px-6 py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A572] focus-visible:ring-inset"
         aria-expanded={revealed}
-        aria-label={`${gift.label} details`}
+        aria-label={`${gift.label} payment details`}
       >
-        <div
-          className="py-8 px-6 transition-all duration-300 hover:shadow-md text-center"
-          style={{
-            border: "1px solid rgba(44,44,44,0.08)",
-            backgroundColor: revealed ? "var(--cream-dark)" : "transparent",
-          }}
-        >
-          <p
-            className="font-display text-xl mb-2"
-            style={{ color: "var(--forest-dark)" }}
-          >
+        {gift.logo ? (
+          <img
+            src={gift.logo}
+            alt={gift.label}
+            className="h-7 md:h-8 w-auto object-contain"
+            loading="lazy"
+          />
+        ) : (
+          <span className="font-display text-xl leading-none" style={{ color: "var(--charcoal)" }}>
             {gift.label}
-          </p>
-          <p className="text-xs tracking-wider uppercase" style={{ color: "var(--forest)" }}>
-            {revealed ? "Tap to hide" : "Tap to reveal"}
-          </p>
-        </div>
+          </span>
+        )}
+        <span className="shrink-0" style={{ color: accent ? "var(--gold)" : "var(--text-muted)" }}>
+          <ToggleIcon open={revealed} />
+        </span>
       </button>
 
-      {/* Revealed details */}
-      <AnimatePresence>
+      {/* Revealed details — expands within the same card */}
+      <AnimatePresence initial={false}>
         {revealed && (
           <motion.div
-            className="mt-4 py-6 px-6 text-center"
-            style={{ border: "1px solid rgba(44,44,44,0.08)" }}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ overflow: "hidden" }}
           >
-            <div className="mb-3">
-              <p className="text-xs tracking-wider uppercase mb-1" style={{ color: "var(--forest)" }}>
-                Account Name
-              </p>
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-sm" style={{ color: "var(--forest-dark)" }}>
-                  {gift.accountName}
-                </span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleCopy(gift.accountName, "name");
-                  }}
-                  className="p-1 transition-colors hover:opacity-70"
-                  style={{ color: "var(--forest)" }}
-                  aria-label={`Copy ${gift.label} account name`}
-                >
-                  {copiedField === "name" ? <CheckIcon /> : <CopyIcon />}
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <p className="text-xs tracking-wider uppercase mb-1" style={{ color: "var(--forest)" }}>
-                Account Number
-              </p>
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-sm tracking-widest" style={{ color: "var(--forest-dark)" }}>
-                  {gift.accountNumber}
-                </span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleCopy(gift.accountNumber, "number");
-                  }}
-                  className="p-1 transition-colors hover:opacity-70"
-                  style={{ color: "var(--forest)" }}
-                  aria-label={`Copy ${gift.label} account number`}
-                >
-                  {copiedField === "number" ? <CheckIcon /> : <CopyIcon />}
-                </button>
-              </div>
-            </div>
-
-            {gift.qrImagePath && (
-              <img
-                src={gift.qrImagePath}
-                alt={`${gift.label} QR code`}
-                className="w-32 h-32 mx-auto mt-4 object-contain"
-                loading="lazy"
+            <div
+              className="px-6 pb-6 pt-5 space-y-4"
+              style={{ borderTop: "1px solid var(--divider)" }}
+            >
+              <DetailRow
+                label="Account Name"
+                value={gift.accountName}
+                copied={copiedField === "name"}
+                onCopy={() => handleCopy(gift.accountName, "name")}
+                copyLabel={`Copy ${gift.label} account name`}
               />
-            )}
+              <DetailRow
+                label="Account Number"
+                value={gift.accountNumber}
+                emphasize
+                copied={copiedField === "number"}
+                onCopy={() => handleCopy(gift.accountNumber, "number")}
+                copyLabel={`Copy ${gift.label} account number`}
+              />
+
+              {gift.qrImagePath && (
+                <div className="pt-2 text-center">
+                  <p
+                    className="text-[10px] tracking-[0.18em] uppercase mb-3"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    Scan to pay
+                  </p>
+                  <img
+                    src={gift.qrImagePath}
+                    alt={`${gift.label} QR code`}
+                    className="w-32 h-32 mx-auto object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -138,7 +226,7 @@ function GiftCard({ gift }: { gift: (typeof config.gifts)[number] }) {
         {copiedField && (
           <motion.div
             className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 text-xs tracking-wider uppercase shadow-lg"
-            style={{ backgroundColor: "var(--forest-dark)", color: "var(--cream)" }}
+            style={{ backgroundColor: "var(--charcoal)", color: "var(--cream)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
@@ -156,7 +244,7 @@ export default function GiftRegistry() {
     <div>
       <motion.p
         className="font-serif text-lg md:text-xl leading-relaxed text-center max-w-xl mx-auto mb-14"
-        style={{ color: "var(--forest)" }}
+        style={{ color: "var(--text-muted)" }}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -166,7 +254,7 @@ export default function GiftRegistry() {
         But if you wish to bless our new beginning...
       </motion.p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto items-start">
         {config.gifts.map((gift, i) => (
           <motion.div
             key={i}

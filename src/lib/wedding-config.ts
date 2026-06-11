@@ -47,6 +47,7 @@ export interface WeddingConfig {
     accountName: string;
     accountNumber: string;
     qrImagePath?: string;
+    logo?: string;
   }>;
   faqs: Array<{
     question: string;
@@ -187,12 +188,14 @@ const config: WeddingConfig = {
       accountName: "Clarence Cedric Lee",
       accountNumber: "011860037850",
       qrImagePath: "/images/qr/BDO.JPG",
+      logo: "/images/logos/bdo.svg",
     },
     {
       label: "BPI",
       accountName: "Clarence Cedric Lee",
       accountNumber: "3729376026",
       qrImagePath: "/images/qr/BPI.PNG",
+      logo: "/images/logos/bpi.svg",
     },
   ],
 
