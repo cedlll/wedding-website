@@ -9,9 +9,9 @@ const principalSponsors = [
 ];
 
 const secondarySponsors = [
-  "Veil: Ms. France De Guzman & Mr. Jedrick Victolero",
-  "Cord: Ms. Corina Dizon & Mr. Dan Victolero",
-  "Candle: Ms. Donabel Buenconsejo & Capt. Cris Buenconsejo",
+  { role: "Veil", names: "Ms. France De Guzman & Mr. Jedrick Victolero" },
+  { role: "Cord", names: "Ms. Corina Dizon & Mr. Dan Victolero" },
+  { role: "Candle", names: "Ms. Donabel Buenconsejo & Capt. Cris Buenconsejo" },
 ];
 
 const brideSide = {
@@ -65,9 +65,10 @@ const groomSide = {
 
       <div>
         <p class="label-text mb-2" style="color: var(--gold-text);">Secondary Sponsors</p>
-        {secondarySponsors.map((pair) => (
+        {secondarySponsors.map((sponsor) => (
           <p class="font-display text-lg md:text-xl" style="color: var(--charcoal); font-weight: 400; line-height: 1.7;">
-            {pair}
+            <span style="color: var(--gold-text); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">{sponsor.role}</span>
+            {" — "}{sponsor.names}
           </p>
         ))}
       </div>
