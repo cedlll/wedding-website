@@ -4,3 +4,9 @@ dist/
 # Claude Code local worktrees (nested git repos)
 .claude/
 .vercel
+
+# macOS
+.DS_Store
+
+# Dependencies
+node_modules/

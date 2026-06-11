@@ -48,31 +48,9 @@ export interface WeddingConfig {
     accountNumber: string;
     qrImagePath?: string;
   }>;
-  rsvp: {
-    googleFormUrl: string;
-    googleFormFields: {
-      name: string;
-      attending: string;
-      guestCount: string;
-      mealPreference: string;
-      songRequest: string;
-      message: string;
-    };
-  };
   faqs: Array<{
     question: string;
     answer: string;
-  }>;
-  story: Array<{
-    year: string;
-    title: string;
-    description: string;
-    image: string;
-  }>;
-  experience: Array<{
-    title: string;
-    description: string;
-    image: string;
   }>;
   accommodations: Array<{
     name: string;
@@ -88,10 +66,6 @@ export interface WeddingConfig {
       alt: string;
     }>;
   };
-  images: {
-    hero: string;
-    storyDivider: string;
-  };
 }
 
 const config: WeddingConfig = {
@@ -105,7 +79,7 @@ const config: WeddingConfig = {
     dayOfWeek: "Saturday",
     iso: "2026-11-07",
     rsvpDeadline: "September 30, 2026",
-    rsvpDeadlineIso: "2026-10-01",
+    rsvpDeadlineIso: "2026-09-30",
   },
 
   venue: {
@@ -156,7 +130,7 @@ const config: WeddingConfig = {
           title: "Gentlemen",
           description:
             "Traditional Barong Tagalog drawn from a warm, understated palette — cream and almond.",
-          image: "/images/attire/gentlemen-sponsor.png",
+          image: "/images/attire/gentlemen-sponsor.webp",
           colorPalette: [
             { name: "Cream", hex: "#F5ECD7" },
             { name: "Almond", hex: "#E8DAC3" },
@@ -166,7 +140,7 @@ const config: WeddingConfig = {
           title: "Ladies",
           description:
             "From the soft stillness of sage and dusty sage to the deep, grounded richness of moss and forest green.",
-          image: "/images/attire/ladies-sponsor.png",
+          image: "/images/attire/ladies-sponsor.webp",
           colorPalette: [
             { name: "Sage", hex: "#B3C5A8" },
             { name: "Dusty Sage", hex: "#8FAE82" },
@@ -183,7 +157,7 @@ const config: WeddingConfig = {
           title: "Gentlemen",
           description:
             "Formal attire in a palette as warm and unhurried as the earth itself — cream, almond, tan, and brown.",
-          image: "/images/attire/gentlemen-guest.png",
+          image: "/images/attire/gentlemen-guest.webp",
           colorPalette: [
             { name: "Cream", hex: "#F5ECD7" },
             { name: "Almond", hex: "#E8DAC3" },
@@ -195,7 +169,7 @@ const config: WeddingConfig = {
           title: "Ladies",
           description:
             "From the delicate softness of cream and almond to the grounded richness of tan and brown.",
-          image: "/images/attire/ladies-guest.png",
+          image: "/images/attire/ladies-guest.webp",
           colorPalette: [
             { name: "Cream", hex: "#F5ECD7" },
             { name: "Almond", hex: "#E8DAC3" },
@@ -222,18 +196,6 @@ const config: WeddingConfig = {
     },
   ],
 
-  rsvp: {
-    googleFormUrl: "// TODO: paste your Google Form URL here",
-    googleFormFields: {
-      name: "entry.XXXXXX",
-      attending: "entry.XXXXXX",
-      guestCount: "entry.XXXXXX",
-      mealPreference: "entry.XXXXXX",
-      songRequest: "entry.XXXXXX",
-      message: "entry.XXXXXX",
-    },
-  },
-
   faqs: [
     {
       question: "What is the dress code?",
@@ -254,51 +216,6 @@ const config: WeddingConfig = {
       question: "Is parking available?",
       answer:
         "Yes, complimentary parking is available at the venue. Attendants will guide you upon arrival.",
-    },
-  ],
-
-  story: [
-    {
-      year: "2019",
-      title: "When we met",
-      description:
-        "What started as a chance encounter at a gathering of friends quickly became the most meaningful conversation of our lives. From that moment, everything changed.",
-      image: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&h=1000&fit=crop",
-    },
-    {
-      year: "2024",
-      title: "The yes",
-      description:
-        "With the golden sun setting over the horizon and the sound of waves as our witness, one knee touched the sand and a forever question was asked.",
-      image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&h=1000&fit=crop",
-    },
-    {
-      year: "2026",
-      title: "Here we are",
-      description:
-        "And now, surrounded by the people who mean the most to us, we begin the next chapter of our story \u2014 together, always.",
-      image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=1000&fit=crop",
-    },
-  ],
-
-  experience: [
-    {
-      title: "Explore Alfonso",
-      description:
-        "Discover the cool mountain breeze, stunning views, and charming cafes and restaurants that make Alfonso, Cavite a beloved destination.",
-      image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=800&fit=crop",
-    },
-    {
-      title: "Cozy stays",
-      description:
-        "From boutique bed-and-breakfasts to hillside villas, find the perfect place to rest before or after the celebration.",
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=800&fit=crop",
-    },
-    {
-      title: "Spa & wellness",
-      description:
-        "Treat yourself to a rejuvenating experience at one of the area's renowned wellness retreats and hot spring resorts.",
-      image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=800&fit=crop",
     },
   ],
 
@@ -333,16 +250,12 @@ const config: WeddingConfig = {
   ],
 
   gallery: {
-    photos: Array.from({ length: 104 }, (_, i) => {
-      const n = i + 1;
-      const filename = n < 100 ? String(n).padStart(2, "0") : String(n);
-      return { src: `/images/prenup/${filename}.webp`, alt: `Cedric & Karen - Photo ${n}` };
-    }),
-  },
-
-  images: {
-    hero: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop",
-    storyDivider: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1920&h=600&fit=crop&crop=center",
+    photos: [
+      { src: "/images/prenup/01.webp", alt: "Cedric & Karen - First photo together" },
+      { src: "/images/prenup/02.webp", alt: "Cedric & Karen - First international travel" },
+      { src: "/images/prenup/03.webp", alt: "Cedric & Karen - Love and laughter" },
+      { src: "/images/prenup/04.webp", alt: "Cedric & Karen - Our favorite place" },
+    ],
   },
 };
 

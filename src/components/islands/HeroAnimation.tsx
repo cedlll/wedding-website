@@ -27,6 +27,12 @@ export default function HeroAnimation() {
     return () => clearInterval(timer);
   }, []);
 
+  // Warm the next slide so the crossfade never reveals a half-loaded image
+  useEffect(() => {
+    const next = new Image();
+    next.src = heroImages[(currentIndex + 1) % heroImages.length];
+  }, [currentIndex]);
+
   return (
     <div className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Visually hidden h1 for screen readers and SEO */}
@@ -45,7 +51,6 @@ export default function HeroAnimation() {
             src={heroImages[currentIndex]}
             alt=""
             className="w-full h-full object-cover"
-            fetchPriority={currentIndex === 0 ? "high" : "low"}
             animate={kenBurnsVariants[currentIndex % kenBurnsVariants.length]}
             transition={{ duration: 5, ease: "linear" }}
           />
