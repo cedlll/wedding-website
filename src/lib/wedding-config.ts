@@ -251,10 +251,10 @@ const config: WeddingConfig = {
 
   gallery: {
     photos: [
-      { src: "/images/prenup/01.webp", alt: "Cedric & Karen - First photo together" },
-      { src: "/images/prenup/02.webp", alt: "Cedric & Karen - First international travel" },
-      { src: "/images/prenup/03.webp", alt: "Cedric & Karen - Love and laughter" },
-      { src: "/images/prenup/04.webp", alt: "Cedric & Karen - Our favorite place" },
+      { src: "/images/firsts/k.webp", alt: "Cedric & Karen - First photo together" },
+      { src: "/images/firsts/vietnam.webp", alt: "Cedric & Karen - First international travel" },
+      { src: "/images/firsts/beach.webp", alt: "Cedric & Karen - First beach trip" },
+      { src: "/images/firsts/blackbird.webp", alt: "Cedric & Karen - First date as a couple" },
     ],
   },
 };
