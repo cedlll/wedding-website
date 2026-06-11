@@ -7,6 +7,8 @@ const allPhotos = config.gallery.photos;
 const tilts = ["scrapbook-tilt-2", "scrapbook-tilt-4", "scrapbook-tilt-1", "scrapbook-tilt-6"];
 const tapeVariants = ["washi-tape--top-left", "washi-tape--top-right", "washi-tape--top-left washi-tape--cream", "washi-tape--top-right"];
 const captions = ["First photo", "First international travel", "First beach trip", "First date as a couple"];
+const years = ["2014", "2025", "2022", "2022"];
+const venues = ["LPU", "Vietnam", "Zambales", "Blackbird Makati"];
 ---
 
 <!-- Top padding is trimmed because this section shares the cream background of the
@@ -54,6 +56,7 @@ const captions = ["First photo", "First international travel", "First beach trip
           <p class="scrapbook-caption text-center mt-2">
             {captions[i]}
           </p>
+          <p class="scrapbook-year text-center">{venues[i]} · {years[i]}</p>
         </div>
       ))}
     </div>
@@ -61,6 +64,15 @@ const captions = ["First photo", "First international travel", "First beach trip
 </section>
 
 <style>
+  .scrapbook-year {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--gold);
+    transform: rotate(-1deg);
+    opacity: 0.9;
+    margin-top: 0.1rem;
+  }
+
   .swipe-arrow {
     display: inline-block;
     animation: swipe-nudge 1.6s ease-in-out infinite;
