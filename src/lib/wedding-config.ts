@@ -245,14 +245,14 @@ const config: WeddingConfig = {
       image: "/images/accommodations/escala-tagaytay.webp",
     },
     {
-      name: "The Woodlands, Tagaytay Highlands",
-      highlight: "Highland Retreat",
+      name: "Hillcreek Gardens Tagaytay",
+      highlight: "Closest to Venue",
       description:
-        "Log cabin–style lodgings tucked among the pines of Tagaytay Highlands, with crisp mountain air and sweeping ridge views — a serene escape after the celebration.",
-      driveTime: "≈ 50 min from the venue",
-      website: "https://www.tagaytayhighlands.com/property/the-woodlands/",
-      phone: "+63 917 852 6378",
-      image: "/images/accommodations/the-woodlands.webp",
+        "A garden estate right in Alfonso with cozy suites, a well-loved restaurant, and lush, manicured grounds — the most convenient stay, just up the road from the celebration.",
+      driveTime: "≈ 10 min from the venue",
+      website: "https://www.hillcreekgardenstagaytay.com",
+      phone: "+63 917 324 5413",
+      image: "/images/accommodations/hillcreek-gardens.webp",
     },
   ],
 
