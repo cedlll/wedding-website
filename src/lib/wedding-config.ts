@@ -224,13 +224,13 @@ const config: WeddingConfig = {
 
   accommodations: [
     {
-      name: "Anya Resort Tagaytay",
+      name: "Twin Lakes Hotel Tagaytay",
       highlight: "Best Overall",
       description:
-        "Top-rated luxury resort in the area with spacious suites, a full spa, pool, and exceptional service — an ideal choice for family and VIP guests.",
-      website: "https://anyaresorts.com",
-      phone: "+63 917 704 6159",
-      image: "/images/accommodations/anya-resort.webp",
+        "An Old European–inspired hotel in the Twin Lakes estate with vineyard and Taal views, warm Filipino hospitality, and easy access along the Tagaytay–Nasugbu highway.",
+      website: "https://www.twinlakeshotel.com.ph",
+      phone: "+63 917 766 7720",
+      image: "/images/accommodations/twin-lakes.webp",
     },
     {
       name: "Escala Tagaytay",
@@ -242,13 +242,13 @@ const config: WeddingConfig = {
       image: "/images/accommodations/escala-tagaytay.webp",
     },
     {
-      name: "Nurture Wellness Village",
-      highlight: "Best for Wellness",
+      name: "The Woodlands, Tagaytay Highlands",
+      highlight: "Highland Retreat",
       description:
-        "A spa-forward retreat surrounded by lush gardens, offering traditional Filipino healing treatments — perfect for winding down before or after the celebration.",
-      website: "https://nurture.com.ph",
-      phone: "+63 917 687 8873",
-      image: "/images/accommodations/nurture-wellness.webp",
+        "Log cabin–style lodgings tucked among the pines of Tagaytay Highlands, with crisp mountain air and sweeping ridge views — a serene escape after the celebration.",
+      website: "https://www.tagaytayhighlands.com/property/the-woodlands/",
+      phone: "+63 917 852 6378",
+      image: "/images/accommodations/the-woodlands.webp",
     },
   ],
 

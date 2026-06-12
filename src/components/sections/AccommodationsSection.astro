@@ -23,7 +23,7 @@ import config from "../../lib/wedding-config";
 
     <!-- Accommodations Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-      {config.accommodations.map((accommodation, i) => (
+      {config.accommodations.map((accommodation) => (
         <article class="stay-card reveal-on-scroll">
           <div class="stay-card__media">
             <img
@@ -31,7 +31,6 @@ import config from "../../lib/wedding-config";
               alt={accommodation.name}
               loading="lazy"
             />
-            <span class="stay-card__index font-display">{String(i + 1).padStart(2, "0")}</span>
             <span class="stay-card__badge">{accommodation.highlight}</span>
           </div>
 
@@ -120,18 +119,6 @@ import config from "../../lib/wedding-config";
       rgba(26, 26, 24, 0) 42%
     );
     pointer-events: none;
-  }
-
-  .stay-card__index {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    z-index: 1;
-    color: var(--white);
-    font-size: 28px;
-    line-height: 1;
-    opacity: 0.85;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
   }
 
   .stay-card__badge {
