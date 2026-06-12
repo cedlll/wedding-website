@@ -2,12 +2,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import config from "../../lib/wedding-config";
 
-// Hero carousel images (WebP for performance)
-const heroImages = Array.from({ length: 10 }, (_, i) => {
-  const n = i + 1;
-  const filename = String(n).padStart(2, "0");
-  return `/images/hero/hero-${filename}.webp`;
-});
+// Hero carousel images (WebP for performance), ordered with best-centered photos first
+const heroImages = [
+  "03", "04", "05", "08", "01", "02", "07", "06", "09", "10",
+].map((n) => `/images/hero/hero-${n}.webp`);
 
 // Ken Burns motion variants — alternating subtle pan + zoom directions
 const kenBurnsVariants = [
