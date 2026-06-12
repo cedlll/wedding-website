@@ -57,6 +57,7 @@ export interface WeddingConfig {
     name: string;
     highlight: string;
     description: string;
+    driveTime?: string;
     website?: string;
     phone?: string;
     image: string;
@@ -228,6 +229,7 @@ const config: WeddingConfig = {
       highlight: "Best Overall",
       description:
         "An Old European–inspired hotel in the Twin Lakes estate with vineyard and Taal views, warm Filipino hospitality, and easy access along the Tagaytay–Nasugbu highway.",
+      driveTime: "≈ 15 min from the venue",
       website: "https://www.twinlakeshotel.com.ph",
       phone: "+63 917 766 7720",
       image: "/images/accommodations/twin-lakes.webp",
@@ -237,6 +239,7 @@ const config: WeddingConfig = {
       highlight: "Most Popular",
       description:
         "Well-established hotel with gorgeous Taal volcano views, consistently praised for its warm service and beloved breakfast spread.",
+      driveTime: "≈ 25 min from the venue",
       website: "https://escalatagaytay.com",
       phone: "+63 2 8519 4444",
       image: "/images/accommodations/escala-tagaytay.webp",
@@ -246,6 +249,7 @@ const config: WeddingConfig = {
       highlight: "Highland Retreat",
       description:
         "Log cabin–style lodgings tucked among the pines of Tagaytay Highlands, with crisp mountain air and sweeping ridge views — a serene escape after the celebration.",
+      driveTime: "≈ 50 min from the venue",
       website: "https://www.tagaytayhighlands.com/property/the-woodlands/",
       phone: "+63 917 852 6378",
       image: "/images/accommodations/the-woodlands.webp",

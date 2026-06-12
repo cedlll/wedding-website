@@ -39,6 +39,10 @@ import config from "../../lib/wedding-config";
               {accommodation.name}
             </h3>
 
+            {accommodation.driveTime && (
+              <p class="stay-card__distance">{accommodation.driveTime}</p>
+            )}
+
             <span class="stay-card__rule"></span>
 
             <p class="stay-card__desc">
@@ -151,6 +155,16 @@ import config from "../../lib/wedding-config";
     font-size: 1.5rem;
     line-height: 1.25;
     letter-spacing: 0.01em;
+  }
+
+  .stay-card__distance {
+    margin-top: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-text);
   }
 
   .stay-card__rule {
