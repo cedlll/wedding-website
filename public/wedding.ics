@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Cedric & Karen Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:wedding-20261107@karencedfinalee.com
+DTSTAMP:20260612T000000Z
+DTSTART:20261107T070000Z
+DTEND:20261107T150000Z
+SUMMARY:Cedric & Karen's Wedding
+LOCATION:Hacienda Solange\, Alfonso\, Cavite
+DESCRIPTION:We can't wait to celebrate with you!\nDetails: https://www.karencedfinalee.com
+URL:https://www.karencedfinalee.com
+END:VEVENT
+END:VCALENDAR
