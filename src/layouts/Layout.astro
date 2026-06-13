@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import config from "../lib/wedding-config";
+import Analytics from "@vercel/analytics/astro";
 
 interface Props {
   title?: string;
@@ -65,6 +66,7 @@ const ogImage = new URL("/images/og-image.jpeg", Astro.site).href;
       Skip to main content
     </a>
     <slot />
+    <Analytics />
     <!-- Scroll-reveal observer for .reveal-on-scroll elements -->
     <script is:inline>
       document.addEventListener("DOMContentLoaded", function () {
