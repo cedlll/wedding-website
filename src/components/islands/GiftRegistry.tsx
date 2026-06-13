@@ -206,7 +206,7 @@ function GiftCard({ gift }: { gift: (typeof config.gifts)[number] }) {
                     className="text-[10px] tracking-[0.18em] uppercase mb-3"
                     style={{ color: "var(--text-muted)" }}
                   >
-                    Scan to pay
+                    Scan to transfer
                   </p>
                   <img
                     src={gift.qrImagePath}
