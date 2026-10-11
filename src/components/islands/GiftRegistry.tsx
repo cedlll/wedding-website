@@ -211,7 +211,7 @@ function GiftCard({ gift }: { gift: (typeof config.gifts)[number] }) {
                   <img
                     src={gift.qrImagePath}
                     alt={`${gift.label} QR code`}
-                    className="w-32 h-32 mx-auto object-contain"
+                    className="w-full max-w-[17rem] aspect-square mx-auto object-contain"
                     loading="lazy"
                   />
                 </div>
