@@ -85,17 +85,28 @@ export default function HeroAnimation() {
           {config.venue.name}, {config.venue.city}
         </motion.p>
 
-        <motion.a
-          href={config.venue.googleMapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-12 py-4 text-xs font-semibold tracking-wider uppercase border-2 border-white text-charcoal bg-white transition-all duration-300 hover:bg-transparent hover:text-white cursor-pointer"
-          style={{ letterSpacing: "0.15em" }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Get directions
-        </motion.a>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <motion.a
+            href={config.venue.googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-12 py-4 text-xs font-semibold tracking-wider uppercase border-2 border-white text-charcoal bg-white transition-all duration-300 hover:bg-transparent hover:text-white cursor-pointer"
+            style={{ letterSpacing: "0.15em" }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get directions
+          </motion.a>
+          <motion.a
+            href="#gifts"
+            className="inline-block px-12 py-4 text-xs font-semibold tracking-wider uppercase border-2 border-white text-white bg-transparent transition-all duration-300 hover:bg-white hover:text-charcoal cursor-pointer"
+            style={{ letterSpacing: "0.15em" }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Gift guide
+          </motion.a>
+        </div>
       </motion.div>
     </div>
   );
